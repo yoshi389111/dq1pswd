@@ -255,7 +255,7 @@ export class Dq1Password {
         const nameNums = name.split('')
             .map(ch => HANKAKU_TO_ZENKAKU[ch] || ch)
             .map(ch => NAME_ALIAS[ch] || ch)
-            .join('').split('')
+            .flatMap(ch => ch.split(''))
             .map(ch => NAME_ALPHABET.indexOf(ch))
             .filter(num => num !== -1);
 
