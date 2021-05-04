@@ -312,7 +312,7 @@ export class Dq1Password {
      * @param password 復活の呪文
      * @return 正規化した復活の呪文
      */
-    toNomalizePassword(password: string): string {
+    toNormalizePassword(password: string): string {
         return password.split('')
             .map(ch => HANKAKU_TO_ZENKAKU[ch] || ch)
             .map(ch => JUMON_ALIAS[ch] || ch)
@@ -394,7 +394,7 @@ export class Dq1Password {
      * @return 解析結果
      */
     analyzePassword(password: string): Dq1PasswordInfo | undefined {
-        const normalized = this.toNomalizePassword(password);
+        const normalized = this.toNormalizePassword(password);
         const passwordNums = this.toNumberPassword(normalized);
         if (passwordNums.length !== JUMON_LENGTH) {
             return;

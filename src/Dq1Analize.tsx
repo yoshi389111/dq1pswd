@@ -56,7 +56,7 @@ const Dq1Edit: React.FC<Props> = ({
         setValidHatena(true);
 
         // 呪文を正規化
-        const normalize = dq1.toNomalizePassword(password);
+        const normalize = dq1.toNormalizePassword(password);
         if (normalize.length !== 20) {
             // 復活の呪文の長さが違う
             setValidLength(false);
@@ -171,7 +171,7 @@ const Dq1Edit: React.FC<Props> = ({
             return;
         }
 
-        const normalized = dq1.toNomalizePassword(password);
+        const normalized = dq1.toNormalizePassword(password);
         const editPassword = (
             normalized.substring(0, 5) + "　" +
             normalized.substring(5, 12) + "\n" +
@@ -210,7 +210,7 @@ const Dq1Edit: React.FC<Props> = ({
     if (!(validItem1 && validItem2 && validItem3 && validItem4 &&
         validItem5 && validItem6 && validItem7 && validItem8 &&
         validKey && validHerb)) {
-        const normalized = dq1.toNomalizePassword(nowPassword);
+        const normalized = dq1.toNormalizePassword(nowPassword);
         if (20 <= normalized.length) {
             errorPassword = (
                 <div>

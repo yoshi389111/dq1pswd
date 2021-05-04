@@ -137,12 +137,12 @@ it("dq1pswd.toNumberPassword", () => {
     expect(dq1.toNumberPassword("びぶべぼぼ　ぼぼぼぼぼぼぼ　ぼぼぼぼぼ　ぼぼぼ")).toEqual([60, 61, 62, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63]);
 });
 
-it("dq1pswd.toNomalizePassword", () => {
+it("dq1pswd.toNormalizePassword", () => {
     const dq1 = new dq1pswd.Dq1Password();
-    expect(dq1.toNomalizePassword("あいうえお")).toEqual("あいうえお");
-    expect(dq1.toNomalizePassword("ぁぃぅぇぉ")).toEqual("あいうえお");
-    expect(dq1.toNomalizePassword("あ　い うaえbお")).toEqual("あいうえお");
-    expect(dq1.toNomalizePassword("あい？えお")).toEqual("あい？えお");
+    expect(dq1.toNormalizePassword("あいうえお")).toEqual("あいうえお");
+    expect(dq1.toNormalizePassword("ぁぃぅぇぉ")).toEqual("あいうえお");
+    expect(dq1.toNormalizePassword("あ　い うaえbお")).toEqual("あいうえお");
+    expect(dq1.toNormalizePassword("あい？えお")).toEqual("あい？えお");
 });
 
 it("dq1pswd.createPassword", () => {
