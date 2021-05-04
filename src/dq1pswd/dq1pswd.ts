@@ -306,7 +306,7 @@ export class Dq1Password {
 
     /** CRC を計算する */
     private calcuteCrc(bytes: Array<number>): number {
-        // 最後の１バイトを除いた分の CRC を計算する
+        // 最初の１バイトを除いた分の CRC を計算する
         let crc = 0;
         for (let i = 1; i < CODE_LENGTH; i++) {
             let octed = bytes[i];
