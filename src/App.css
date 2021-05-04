@@ -1,0 +1,214 @@
+.App {
+  text-align: center;
+}
+
+body {
+  max-width: 550px;
+  margin: auto;
+  color: white;
+  background-color: #00000f;
+  overflow-y: scroll;
+  padding: 3em 0;
+  font-size: 16px;
+}
+
+h1 {
+  font-size: 1.5em;
+  line-height: 1em;
+  font-weight: bold;
+  margin: .5em 0;
+}
+
+h2 {
+  font-size: 1.1em;
+  font-weight: bold;
+  margin: .5em 0;
+  padding-bottom: 0.1em;
+  border-bottom: 3px solid white;
+}
+
+input,
+select {
+  color: white;
+  background-color: #00000f;
+  border: 0;
+}
+
+option {
+  background-color: #303040;
+}
+
+input:focus,
+input:hover,
+select:focus,
+select:hover {
+  outline: 1px white dotted;
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: #303040;
+  height: 3em;
+  z-index: 10;
+}
+
+.footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #303040;
+  height: 3em;
+  z-index: 10;
+}
+
+.frame {
+  box-sizing: border-box;
+  border: 3px solid white;
+  border-radius: 1em;
+  padding-bottom: 1em;
+  margin: 1em 0 0.5em 0;
+}
+
+.row-line {
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.row-line label {
+  display: inline-block;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.row-line .label {
+  display: inline-block;
+  box-sizing: border-box;
+  width: 40%;
+  margin-right: 1em;
+  text-align: right;
+}
+
+.row-line .value {
+  display: inline-block;
+  box-sizing: border-box;
+  width: 40%;
+  margin-left: 1em;
+  text-align: left;
+}
+
+.page-button {
+  font-weight: normal;
+  color: #c0c0c0;
+}
+
+.page-button.selected {
+  font-weight: 700;
+  color: white;
+}
+
+.password-area {
+  color: white;
+  background-color: #00000f;
+  border: none;
+  outline: none;
+  font-size: 1.5em;
+  resize: none;
+  width: auto;
+}
+
+.password-area:hover {
+  outline: 1px white dotted;
+}
+
+.error {
+  color: #ef454a;
+  font-weight: bold;
+}
+
+.button-area {
+  max-width: 400px;
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+}
+
+#overlay .button-area {
+  justify-content: space-around;
+}
+
+.button {
+  font-size: 1em;
+  line-height: 1em;
+  padding: 1em 0;
+  cursor: pointer;
+  color: #cccccc;
+}
+
+.button.disable {
+  pointer-events: none;
+  color: gray;
+}
+
+.button:hover:not(.disable) {
+  transition: all 0.5s ease;
+  text-shadow: #ffffff 0 0 5px;
+  color: white;
+}
+
+.error-box {
+  margin: 1em 0;
+  color:#ef454a
+}
+
+.password-selection {
+  cursor: pointer;
+  color: #cccccc;
+  border: 1px transparent dotted;
+  position: relative;
+}
+.password-selection:hover {
+  border: 1px white dotted;
+  text-shadow: #ffffff 0 0 5px;
+  color: white;
+}
+
+#overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#overlay .frame {
+  width: 100%;
+  max-width: 400px;
+  background-color: #00000f;
+}
+
+.frame .dialog-buttons {
+  max-width: 400px;
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+}
