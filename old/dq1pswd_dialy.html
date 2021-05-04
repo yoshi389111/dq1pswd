@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>Diary of DQ1-PASSWORD.</title>
+</head>
+
+<body>
+<h1>DQ1 復活の呪文解析日記</h1>
+<p>[ Back to DQ-Password Room ]
+[ Top ]</p>
+
+<hr/>
+<h2><a name="index" id="index">●日記の一覧</a></h2>
+<ul>
+
+<li>【2001/07/14】<a href="#d20010714">各データの最終版</a></li>
+<li>【1998/05/31】<a href="#d19980531">最後のフラグ</a></li>
+<li>【1998/02/07】<a href="#d19980207">戦士の指輪</a></li>
+<li>【1997/07/27】<a href="#d19970727">マジックナンバー</a></li>
+<li>【1997/07/25】<a href="#d19970725">完成！！かな？</a></li>
+<li>【1997/07/22】<a href="#d19970722">チェックコード</a></li>
+<li>【1997/07/20】<a href="#d19970720">各データ</a></li>
+<li>【1997/07/19】<a href="#d19970719">名前</a></li>
+<li>【1997/07/18】<a href="#d19970718">勇者「００００」</a></li>
+<li>【1997/07/13】<a href="#d19970713">勇者「あああ＊」</a></li>
+<li>【1997/07/12】<a href="#d19970712">差分の見方</a></li>
+<li>【1997/07/11】<a href="#d19970711">120 bit</a></li>
+<li>【1997/07/10】<a href="#d19970710">勇者「ああああ」</a></li>
+<li>【1997/07/09】<a href="#d19970709">コード表</a></li>
+<li>【1997/07/08】<a href="#d19970708">その２</a></li>
+<li>【1997/06/08】<a href="#d19970608">DQ1 の復活の呪文解析</a></li>
+</ul>
+
+<hr/>
+<h2>注意書き</h2>
+<p>しばらく前までは某ページにて DQ1 の復活の呪文が作成できました。
+現在では残念ながら、そのページはありません。<br/>
+10 年以上前のとある雑誌には DQ1 復活の呪文作成プログラムがあったそうです
+( 詳細は WANTED!! のページまで ) 。
+しかしこの雑誌を入手するのは難しそうです。</p>
+<p>でもやっぱり、復活の呪文を捏造したくはないですか？<br/>
+そこでなんとかできないものかと、独自に復活の呪文の解析を始めました。<br/>
+で、思い立って現状分かっている部分だけでも公開しようかと、
+日記形式にしてみました。</p>
+<p>というか、最初の 6/08 の分は本当に日記のページで公開していたのです。<br/>
+しかし、その後気が変わって削除していました。<br/>
+7/09 ～ 7/16 分は手元のメモや記憶を頼りにでっち上げたものです。</p>
+<p>ちなみに、これらの解析情報はなんら根拠がありません。
+もしかすると「有害無益」かもしれません。
+お気を付け下さい。</p>
+
+<hr/>
+<h2><a name="d19970608" id="d19970608">DQ1 の復活の呪文解析</a></h2>
+<p>【1997/06/08】</p>
+<p>今日は良い天気だったし、洗濯だけしてどこにも出かけずゴロゴロしていたんですが、
+ふと思い立って、 ドラゴンクエスト (DQ1) の復活の呪文の解析を始めました。<br/>
+とりあえず、なにも持っていない状態で復活の呪文を聞いてみました。<br/>
+同じ状態でも何種類かの復活の呪文を聞くことが出来るのですが、
+実際にやってみると８種類までは聞くことが出来ました。</p>
+<ul>
+<li>おさべつに　はほわげげだど　べうきさそ　さには</li>
+<li>かこぶちな　のへろぐぐぶい　かこせつに　つへむ</li>
+<li>けせいなの　へごべううつに　はほめよれ　よごぜ</li>
+<li>こちおねふ　みずいかかすち　なのへむゆ　むわげ</li>
+<li>ゆるへたと　ねふれぎぎぜづ　びあおけす　けとね</li>
+<li>よわみてぬ　ひまがごごぼえ　くしたとね　とまも</li>
+<li>るげやぬひ　まじあおおとね　ふみやりわ　りじだ</li>
+<li>れぐもには　ほざぼええさそ　てぬひまも　まれぎ</li>
+</ul>
+<p>まあ、数字もきりがいいし、こんなものだろうと思い、次にいよいよ呪文の解析です。<br/>
+名前は「あ△△△」でアイテムその他は無しです（ここでは△はスペースをあらわしています）。</p>
+<p>まず気が付くのは、
+どの呪文も 9 文字目と 10 文字目が同じ文字だということです。<br/>
+それに、 ある文字とその次の文字が
+4 文字だけ離れている場合が多いということでしょうか。<br/>
+それもある呪文で 4 文字だけ離れていると、
+他の呪文でも同じ場所は 4 文字だけ離れていることが多い。<br/>
+同様に 7 文字離れていると、他の呪文の同じ場所でも
+7 文字離れていることがほとんどのようです。</p>
+<p>どうやら、文字と文字の差分にこそ情報が隠れているようですね。<br/>
+しかし、ここで問題が一つ。
+差分を抜き出すには文字コードが分からないといけないのですが、
+この場合はどうなっているんでしょう？
+まあ、差分から逆に求めればなんとかなりそうな気がするんですが…<br/>
+ともかく、今日はここまでにしましょう。</p>
+<p>↑ <a href="#index">一覧へ戻る</a></p>
+
+<hr/>
+<h2><a name="d19970708" id="d19970708">その２</a></h2>
+<p>【1997/07/08】</p>
+<p>しばらくぶりに気が向いたので復活の呪文を取得。<br/>
+名前「あ△△△」、アイテムはたいまつが１つだけ。</p>
+<ul>
+<li>おさべざぞ　でぶしたたまも　らろぐじだ　じせつ</li>
+<li>かこぶごぜ　づびさそそには　はめよれぎ　れおけ</li>
+<li>けせいぜづ　びちまももれぎ　ざぞでぶい　ぶのへ</li>
+<li>こちおぢば　ぼとめよよぜづ　びあおけす　けやり</li>
+<li>ゆるへげず　ぢばこせせへむ　ゆるがごぜ　ごした</li>
+<li>よわみじだ　どべすちちねふ　みやりわげ　わきさ</li>
+<li>るげやだど　べてむゆゆわげ　ずぢばぼえ　ぼひま</li>
+<li>れぐもぞで　ぶつみややじだ　どべうきさ　きめよ</li>
+</ul>
+<p>あれ？前回からちょうど一ヶ月だね (^^;</p>
+<p>↑ <a href="#index">一覧へ戻る</a></p>
+
+<hr/>
+<h2><a name="d19970709" id="d19970709">コード表</a></h2>
+<p>【1997/07/09】</p>
+<p>復活の呪文で使われている 64 文字のコード表は
+おそらく次の通りでしょう。</p>
+<table border="1" summary="復活の呪文のコード表">
+<caption>復活の呪文のコード表</caption>
+<tr><th>   </th><th>+0</th><th>+1</th><th>+2</th><th>+3</th><th>+4</th></tr>
+<tr><th>+00</th><td>あ</td><td>い</td><td>う</td><td>え</td><td>お</td></tr>
+<tr><th>+05</th><td>か</td><td>き</td><td>く</td><td>け</td><td>こ</td></tr>
+<tr><th>+10</th><td>さ</td><td>し</td><td>す</td><td>せ</td><td>そ</td></tr>
+<tr><th>+15</th><td>た</td><td>ち</td><td>つ</td><td>て</td><td>と</td></tr>
+<tr><th>+20</th><td>な</td><td>に</td><td>ぬ</td><td>ね</td><td>の</td></tr>
+<tr><th>+25</th><td>は</td><td>ひ</td><td>ふ</td><td>へ</td><td>ほ</td></tr>
+<tr><th>+30</th><td>ま</td><td>み</td><td>む</td><td>め</td><td>も</td></tr>
+<tr><th>+35</th><td>や</td><td>ゆ</td><td>よ</td></tr>
+<tr><th>+38</th><td>ら</td><td>り</td><td>る</td><td>れ</td><td>ろ</td></tr>
+<tr><th>+43</th><td>わ</td></tr>
+<tr><th>+44</th><td>が</td><td>ぎ</td><td>ぐ</td><td>げ</td><td>ご</td></tr>
+<tr><th>+49</th><td>ざ</td><td>じ</td><td>ず</td><td>ぜ</td><td>ぞ</td></tr>
+<tr><th>+54</th><td>だ</td><td>ぢ</td><td>づ</td><td>で</td><td>ど</td></tr>
+<tr><th>+59</th><td>ば</td><td>び</td><td>ぶ</td><td>べ</td><td>ぼ</td></tr>
+</table>
+
+<p>これをもとに、前回・前々回の復活の呪文の差分を取ってみると…</p>
+
+<table border="1" summary="名前「あ△△△」アイテム無し（計算例）">
+<caption>名前「あ△△△」アイテム無し（計算例）</caption>
+<tr><th>文字位置          </th><th>+1</th><th>+2</th><th>+3</th><th>+4</th><th>+5</th><th>- </th><th>+6</th><th>+7</th><th>+8</th><th>+9</th><th>10</th><th>11</th><th>12</th><th>- </th><th>13</th><th>14</th><th>15</th><th>16</th><th>17</th><th>- </th><th>18</th><th>19</th><th>20</th></tr>
+<tr><th>文字              </th><td>け</td><td>せ</td><td>い</td><td>な</td><td>の</td><td>- </td><td>へ</td><td>ご</td><td>べ</td><td>う</td><td>う</td><td>つ</td><td>に</td><td>- </td><td>は</td><td>ほ</td><td>め</td><td>よ</td><td>れ</td><td>- </td><td>よ</td><td>ご</td><td>ぜ</td></tr>
+<tr><th>文字コード(10進数)</th><td>08</td><td>13</td><td>01</td><td>20</td><td>24</td><td>- </td><td>28</td><td>48</td><td>62</td><td>02</td><td>02</td><td>17</td><td>21</td><td>- </td><td>25</td><td>29</td><td>36</td><td>37</td><td>41</td><td>- </td><td>37</td><td>48</td><td>52</td></tr>
+<tr><th>１つ前の文字との差</th><td>--</td><td>05</td><td>52</td><td>19</td><td>04</td><td>- </td><td>04</td><td>20</td><td>14</td><td>04</td><td>00</td><td>15</td><td>04</td><td>- </td><td>04</td><td>04</td><td>04</td><td>04</td><td>04</td><td>- </td><td>60</td><td>11</td><td>04</td></tr>
+<tr><th>文字の差(８進数)  </th><td>10</td><td>05</td><td>64</td><td>23</td><td>04</td><td>- </td><td>04</td><td>24</td><td>16</td><td>04</td><td>00</td><td>17</td><td>04</td><td>- </td><td>04</td><td>04</td><td>04</td><td>04</td><td>04</td><td>- </td><td>74</td><td>13</td><td>04</td></tr>
+</table>
+
+<p>となります。最後の行は８進数です。
+最初のコード(+1の位置)は、１文字目のコードをそのまま書いてあります。</p>
+
+<p>残りのものも含めて、「文字の差(８進数)」の個所だけ表にしてみます。<br/>
+まずは、アイテム無しのもの。</p>
+
+
+<table border="1" summary="名前「あ△△△」アイテム無し（文字の差(８進数)）">
+<caption>名前「あ△△△」アイテム無し（文字の差(８進数)）</caption>
+<tr><th>文字位置</th><th>+1</th><th>+2</th><th>+3</th><th>+4</th><th>+5</th><th>- </th><th>+6</th><th>+7</th><th>+8</th><th>+9</th><th>10</th><th>11</th><th>12</th><th>- </th><th>13</th><th>14</th><th>15</th><th>16</th><th>17</th><th>- </th><th>18</th><th>19</th><th>20</th></tr>
+<tr><th>１つ目  </th><td>04</td><td>06</td><td>64</td><td>23</td><td>04</td><td>- </td><td>04</td><td>04</td><td>16</td><td>04</td><td>00</td><td>07</td><td>04</td><td>- </td><td>04</td><td>04</td><td>04</td><td>04</td><td>04</td><td>- </td><td>74</td><td>13</td><td>04</td></tr>
+<tr><th>２つ目  </th><td>05</td><td>04</td><td>64</td><td>23</td><td>04</td><td>- </td><td>04</td><td>04</td><td>16</td><td>04</td><td>00</td><td>17</td><td>04</td><td>- </td><td>04</td><td>04</td><td>04</td><td>04</td><td>04</td><td>- </td><td>74</td><td>13</td><td>04</td></tr>
+<tr><th>３つ目  </th><td>10</td><td>05</td><td>64</td><td>23</td><td>04</td><td>- </td><td>04</td><td>24</td><td>16</td><td>04</td><td>00</td><td>17</td><td>04</td><td>- </td><td>04</td><td>04</td><td>04</td><td>04</td><td>04</td><td>- </td><td>74</td><td>13</td><td>04</td></tr>
+<tr><th>４つ目  </th><td>11</td><td>07</td><td>64</td><td>23</td><td>04</td><td>- </td><td>04</td><td>24</td><td>16</td><td>04</td><td>00</td><td>07</td><td>04</td><td>- </td><td>04</td><td>04</td><td>04</td><td>04</td><td>04</td><td>- </td><td>74</td><td>13</td><td>04</td></tr>
+<tr><th>５つ目  </th><td>44</td><td>04</td><td>64</td><td>63</td><td>04</td><td>- </td><td>04</td><td>04</td><td>16</td><td>04</td><td>00</td><td>07</td><td>04</td><td>- </td><td>04</td><td>04</td><td>04</td><td>04</td><td>04</td><td>- </td><td>74</td><td>13</td><td>04</td></tr>
+<tr><th>６つ目  </th><td>45</td><td>06</td><td>64</td><td>63</td><td>04</td><td>- </td><td>04</td><td>04</td><td>16</td><td>04</td><td>00</td><td>17</td><td>04</td><td>- </td><td>04</td><td>04</td><td>04</td><td>04</td><td>04</td><td>- </td><td>74</td><td>13</td><td>04</td></tr>
+<tr><th>７つ目  </th><td>50</td><td>07</td><td>64</td><td>63</td><td>04</td><td>- </td><td>04</td><td>24</td><td>16</td><td>04</td><td>00</td><td>17</td><td>04</td><td>- </td><td>04</td><td>04</td><td>04</td><td>04</td><td>04</td><td>- </td><td>74</td><td>13</td><td>04</td></tr>
+<tr><th>８つ目  </th><td>51</td><td>05</td><td>64</td><td>63</td><td>04</td><td>- </td><td>04</td><td>24</td><td>16</td><td>04</td><td>00</td><td>07</td><td>04</td><td>- </td><td>04</td><td>04</td><td>04</td><td>04</td><td>04</td><td>- </td><td>74</td><td>13</td><td>04</td></tr>
+</table>
+
+<p>次は、アイテムとしてたいまつ１つだけのもの。</p>
+
+<table border="1" summary="名前「あ△△△」たいまつ１つだけ（文字の差(８進数)）">
+<caption>名前「あ△△△」たいまつ１つだけ（文字の差(８進数)）</caption>
+<tr><th>文字位置</th><th>+1</th><th>+2</th><th>+3</th><th>+4</th><th>+5</th><th>- </th><th>+6</th><th>+7</th><th>+8</th><th>+9</th><th>10</th><th>11</th><th>12</th><th>- </th><th>13</th><th>14</th><th>15</th><th>16</th><th>17</th><th>- </th><th>18</th><th>19</th><th>20</th></tr>
+<tr><th>１つ目  </th><td>04</td><td>06</td><td>64</td><td>63</td><td>04</td><td>- </td><td>04</td><td>04</td><td>16</td><td>04</td><td>00</td><td>17</td><td>04</td><td>- </td><td>04</td><td>04</td><td>04</td><td>04</td><td>04</td><td>- </td><td>74</td><td>33</td><td>04</td></tr>
+<tr><th>２つ目  </th><td>05</td><td>04</td><td>64</td><td>63</td><td>04</td><td>- </td><td>04</td><td>04</td><td>16</td><td>04</td><td>00</td><td>07</td><td>04</td><td>- </td><td>04</td><td>04</td><td>04</td><td>04</td><td>04</td><td>- </td><td>74</td><td>33</td><td>04</td></tr>
+<tr><th>３つ目  </th><td>10</td><td>05</td><td>64</td><td>63</td><td>04</td><td>- </td><td>04</td><td>24</td><td>16</td><td>04</td><td>00</td><td>07</td><td>04</td><td>- </td><td>04</td><td>04</td><td>04</td><td>04</td><td>04</td><td>- </td><td>74</td><td>33</td><td>04</td></tr>
+<tr><th>４つ目  </th><td>11</td><td>07</td><td>64</td><td>63</td><td>04</td><td>- </td><td>04</td><td>24</td><td>16</td><td>04</td><td>00</td><td>17</td><td>04</td><td>- </td><td>04</td><td>04</td><td>04</td><td>04</td><td>04</td><td>- </td><td>74</td><td>33</td><td>04</td></tr>
+<tr><th>５つ目  </th><td>44</td><td>04</td><td>64</td><td>23</td><td>04</td><td>- </td><td>04</td><td>04</td><td>16</td><td>04</td><td>00</td><td>17</td><td>04</td><td>- </td><td>04</td><td>04</td><td>04</td><td>04</td><td>04</td><td>- </td><td>74</td><td>33</td><td>04</td></tr>
+<tr><th>６つ目  </th><td>45</td><td>06</td><td>64</td><td>23</td><td>04</td><td>- </td><td>04</td><td>04</td><td>16</td><td>04</td><td>00</td><td>07</td><td>04</td><td>- </td><td>04</td><td>04</td><td>04</td><td>04</td><td>04</td><td>- </td><td>74</td><td>33</td><td>04</td></tr>
+<tr><th>７つ目  </th><td>50</td><td>07</td><td>64</td><td>23</td><td>04</td><td>- </td><td>04</td><td>24</td><td>16</td><td>04</td><td>00</td><td>07</td><td>04</td><td>- </td><td>04</td><td>04</td><td>04</td><td>04</td><td>04</td><td>- </td><td>74</td><td>33</td><td>04</td></tr>
+<tr><th>８つ目  </th><td>51</td><td>05</td><td>64</td><td>23</td><td>04</td><td>- </td><td>04</td><td>24</td><td>16</td><td>04</td><td>00</td><td>17</td><td>04</td><td>- </td><td>04</td><td>04</td><td>04</td><td>04</td><td>04</td><td>- </td><td>74</td><td>33</td><td>04</td></tr>
+</table>
+
+<p>大きな違いは、最後から２番目のコード。
+このあたりにアイテム１番目のデータが入っているのかな？<br/>
+</p>
+<p>↑ <a href="#index">一覧へ戻る</a></p>
+
+<hr/>
+<h2><a name="d19970710" id="d19970710">勇者「ああああ」</a></h2>
+<p>【1997/07/10】</p>
+<p>復活の呪文の文字と、名前の文字は別のコードですよね。<br/>
+勝手な想像ですけど、名前のコードは「あ」が 0 で
+あ行～ま行・やゆよ・ら行・わをん・濁点・半濁点・
+っゃゅょ－・数字の０～９・空白の順に並び、
+最後の空白が 63 ( 10 進数 ) の様な気がします。<br/>
+まあ、何の理由もないんですけどね。<br/>
+強いてあげれば、昔の「さとしくん」のページがそうなっていたから、ですけど (^^;;</p>
+<p>というわけで、名前「ああああ」アイテム何もなし。</p>
+<ul>
+
+<li>なひべおけ　すちまもそひま　もらろぐじ　きした</li>
+<li>にはぶえく　したほめせつに　はほめよれ　ぶうき</li>
+<li>のほいくし　たやざぞめよれ　ぎざぞでぶ　つぬひ</li>
+<li>はむおさそ　てらぜづゆごぜ　づびあおけ　へめよ</li>
+<li>ぜづへうき　さそへむすのへ　むゆるがご　おこせ</li>
+<li>ぞばみかこ　せつみやたとね　ふみやりわ　ぼおけ</li>
+<li>づぼやこせ　つよずぢやりわ　げずぢばぼ　とのへ</li>
+<li>でべもけす　ちゆじだもぐじ　だどべうき　ひみや</li>
+</ul>
+<p>そして、その差分。</p>
+<table border="1" summary="名前「ああああ」アイテムなし（文字の差(８進数)）">
+<caption>名前「ああああ」アイテムなし（文字の差(８進数)）</caption>
+<tr><th>文字位置</th><th>+1</th><th>+2</th><th>+3</th><th>+4</th><th>+5</th><th>- </th><th>+6</th><th>+7</th><th>+8</th><th>+9</th><th>10</th><th>11</th><th>12</th><th>- </th><th>13</th><th>14</th><th>15</th><th>16</th><th>17</th><th>- </th><th>18</th><th>19</th><th>20</th></tr>
+<tr><th>１つ目  </th><td>24</td><td>06</td><td>44</td><td>06</td><td>04</td><td>- </td><td>04</td><td>04</td><td>16</td><td>04</td><td>54</td><td>14</td><td>04</td><td>- </td><td>04</td><td>04</td><td>04</td><td>04</td><td>04</td><td>- </td><td>24</td><td>05</td><td>04</td></tr>
+<tr><th>２つ目  </th><td>25</td><td>04</td><td>44</td><td>06</td><td>04</td><td>- </td><td>04</td><td>04</td><td>16</td><td>04</td><td>54</td><td>04</td><td>04</td><td>- </td><td>04</td><td>04</td><td>04</td><td>04</td><td>04</td><td>- </td><td>24</td><td>05</td><td>04</td></tr>
+<tr><th>３つ目  </th><td>30</td><td>05</td><td>44</td><td>06</td><td>04</td><td>- </td><td>04</td><td>24</td><td>16</td><td>04</td><td>54</td><td>04</td><td>04</td><td>- </td><td>04</td><td>04</td><td>04</td><td>04</td><td>04</td><td>- </td><td>24</td><td>05</td><td>04</td></tr>
+<tr><th>４つ目  </th><td>31</td><td>07</td><td>44</td><td>06</td><td>04</td><td>- </td><td>04</td><td>24</td><td>16</td><td>04</td><td>54</td><td>14</td><td>04</td><td>- </td><td>04</td><td>04</td><td>04</td><td>04</td><td>04</td><td>- </td><td>24</td><td>05</td><td>04</td></tr>
+<tr><th>５つ目  </th><td>70</td><td>07</td><td>44</td><td>46</td><td>04</td><td>- </td><td>04</td><td>24</td><td>16</td><td>04</td><td>54</td><td>04</td><td>04</td><td>- </td><td>04</td><td>04</td><td>04</td><td>04</td><td>04</td><td>- </td><td>24</td><td>05</td><td>04</td></tr>
+<tr><th>６つ目  </th><td>71</td><td>05</td><td>44</td><td>46</td><td>04</td><td>- </td><td>04</td><td>24</td><td>16</td><td>04</td><td>54</td><td>14</td><td>04</td><td>- </td><td>04</td><td>04</td><td>04</td><td>04</td><td>04</td><td>- </td><td>24</td><td>05</td><td>04</td></tr>
+<tr><th>７つ目  </th><td>64</td><td>04</td><td>44</td><td>46</td><td>04</td><td>- </td><td>04</td><td>04</td><td>16</td><td>04</td><td>54</td><td>14</td><td>04</td><td>- </td><td>04</td><td>04</td><td>04</td><td>04</td><td>04</td><td>- </td><td>24</td><td>05</td><td>04</td></tr>
+<tr><th>８つ目  </th><td>65</td><td>06</td><td>44</td><td>46</td><td>04</td><td>- </td><td>04</td><td>04</td><td>16</td><td>04</td><td>54</td><td>04</td><td>04</td><td>- </td><td>04</td><td>04</td><td>04</td><td>04</td><td>04</td><td>- </td><td>24</td><td>05</td><td>04</td></tr>
+</table>
+
+<p>↑ <a href="#index">一覧へ戻る</a></p>
+
+<hr/>
+<h2><a name="d19970711" id="d19970711">120 bit</a></h2>
+<p>【1997/07/11】</p>
+<p>今回はいつもとは逆に、
+復活の呪文 ( 6 bit * 20 文字 = 120 bit ) にどんなデータが含まれているか、です。</p>
+<ul>
+<li>名前４文字 ( 6 bit * 4 )</li>
+<li>経験値 0 ～ 65535 ( 16 bit )</li>
+<li>ゴールド 0 ～ 65535 ( 16 bit )</li>
+<li>武器 ７種 ( 3 bit )<br/>
+	なし / たけざお / こんぼう / どうのつるぎ /<br/>
+	てつのおの / はがねのつるぎ / ほのおのつるぎ / ロトのつるぎ</li>
+<li>鎧 ７種 ( 3 bit )<br/>
+	なし / ぬののふく / かわのふく / くさりかたびら /<br/>
+	てつのよろい / はがねのよろい / まほうのよろい / ロトのよろい</li>
+<li>盾 ３種 ( 2 bit )<br/>
+	なし / かわのたて / てつのたて / みかがみのたて</li>
+<li>薬草 0 ～ 6 ( 3 bit )</li>
+<li>鍵 0 ～ 6 ( 3 bit )</li>
+<li>道具 14 種 ( 4 bit * 8 )<br/>
+	なし / たいまつ / せいすい / キメラのつばさ /<br/>
+	りゅうのうろこ / ようせいのふえ / せんしのゆびわ / ロトのしるし /<br/>
+	おうじょのあい / のろいのベルト / ぎんのたてごと / しのくびかざり /<br/>
+	たいようのいし / あまぐものつえ / にじのしずく</li>
+</ul>
+<p>以上ですね。<br/>
+全部合わせると… 102 bit かな？<br/>
+ってことは、残りは 18 bit ( 3 文字分 )。<br/>
+チェックコードが 18 bit もあるのかなぁ？</p>
+<p>↑ <a href="#index">一覧へ戻る</a></p>
+
+<hr/>
+<h2><a name="d19970712" id="d19970712">差分の見方</a></h2>
+<p>【1997/07/12】</p>
+<p>差分の見方ですが、04 とかのいつもあるデータは
+そのビットを XOR するのか、ビット自体を削除してしまうのか、
+その 04 自体を引くのか、またはそれらを組み合わせた計算をするのだと思います。<br/>
+どうやっているのかは、まだ分かりませんが。<br/>
+# なんとなく 特定の数字パターンを引いていくんじゃないかな。</p>
+<p>それと、同じ状態で聞ける 8 種類の復活の呪文で
+相違のあるビットはチェックコードかなにかなのでしょう。<br/>
+最初の１文字目はどーやったらいいか分からないのでとりあえずおいといて</p>
+
+<table border="1" summary="チェックコードらしき箇所（文字の差(８進数)）">
+<caption>チェックコードらしき箇所（文字の差(８進数)）</caption>
+<tr><th>文字位置</th><th>+1</th><th>+2</th><th>+3</th><th>+4</th><th>+5</th><th>- </th><th>+6</th><th>+7</th><th>+8</th><th>+9</th><th>10</th><th>11</th><th>12</th><th>- </th><th>13</th><th>14</th><th>15</th><th>16</th><th>17</th><th>- </th><th>18</th><th>19</th><th>20</th></tr>
+<tr><th>コード  </th><td>77</td><td>03</td><td>00</td><td>40</td><td>00</td><td>- </td><td>00</td><td>20</td><td>00</td><td>00</td><td>00</td><td>10</td><td>00</td><td>- </td><td>00</td><td>00</td><td>00</td><td>00</td><td>00</td><td>- </td><td>00</td><td>00</td><td>00</td></tr>
+</table>
+
+<p>こんなところがチェックコード（かもしれない）ビットでしょう。</p>
+<p>最初の１文字目がどうやって決まるかが全く分かりません。<br/>
+が、ちょっとだけ気になることがあります。<br/>
+８パターンの復活の呪文をならべると、
+９文字目が連続しているように思えることです。<br/>
+上記の復活の呪文の９文字目を縦に読んでください。<br/>
+名前「あ△△△」でアイテム無し：「うえおか」「ぎぐげご」<br/>
+名前「あ△△△」でたいまつだけ：「せそたち」「もやゆよ」<br/>
+名前「ああああ」でアイテム無し：「ぞだぢづ」「むめもや」<br/>
+このように４つ連続した組が２つあるみたいじゃないですか？<br/>
+もしかすると、このあたりが解析の鍵になるかもしれません。<br/>
+ただの偶然かもしれませんが (^^;</p>
+<p>↑ <a href="#index">一覧へ戻る</a></p>
+
+<hr/>
+<h2><a name="d19970713" id="d19970713">勇者「あああ＊」</a></h2>
+<p>【1997/07/13】</p>
+<p>少しだけ名前を変えて調べてみましょう。</p>
+<table border="1" summary="名前「あああい」アイテム無し">
+<caption>名前「あああい」アイテム無し</caption>
+<tr><th>文字位置          </th><th>+1</th><th>+2</th><th>+3</th><th>+4</th><th>+5</th><th>- </th><th>+6</th><th>+7</th><th>+8</th><th>+9</th><th>10</th><th>11</th><th>12</th><th>- </th><th>13</th><th>14</th><th>15</th><th>16</th><th>17</th><th>- </th><th>18</th><th>19</th><th>20</th></tr>
+<tr><th>文字              </th><td>さ</td><td>そ</td><td>じ</td><td>づ</td><td>び</td><td>- </td><td>あ</td><td>な</td><td>も</td><td>ら</td><td>ぬ</td><td>も</td><td>ら</td><td>- </td><td>ろ</td><td>ぐ</td><td>じ</td><td>だ</td><td>ど</td><td>- </td><td>そ</td><td>と</td><td>ね</td></tr>
+<tr><th>文字の差(８進数)  </th><td>12</td><td>04</td><td>44</td><td>06</td><td>04</td><td>- </td><td>04</td><td>24</td><td>16</td><td>04</td><td>60</td><td>14</td><td>04</td><td>- </td><td>04</td><td>04</td><td>04</td><td>04</td><td>04</td><td>- </td><td>24</td><td>05</td><td>04</td></tr>
+</table>
+<p>面倒なんで、１つだけね (^^;<br/>
+先日の差分の見方を参考にすると、
+変わった箇所は 54(８進数) 固定の部分(10文字目)が
+60(８進数)  になっているってとこでしょうか。<br/>
+固定の部分を引くと<strong>仮定</strong>すると、
+60 - 54 = 4 で ( 8 進数ですんで、念のため )
+ビットが１つ立ったわけですね。<br/>
+で、もう一つの<strong>仮定</strong>として「あ」が 0 、「い」が 1 であれば
+このビットこそが、名前の４文字目の１番下のビットということでしょう。</p>
+<p>続いて勇者「あああう」アイテム無しです。</p>
+<table border="1" summary="名前「あああう」アイテム無し">
+<caption>名前「あああう」アイテム無し</caption>
+<tr><th>文字位置          </th><th>+1</th><th>+2</th><th>+3</th><th>+4</th><th>+5</th><th>- </th><th>+6</th><th>+7</th><th>+8</th><th>+9</th><th>10</th><th>11</th><th>12</th><th>- </th><th>13</th><th>14</th><th>15</th><th>16</th><th>17</th><th>- </th><th>18</th><th>19</th><th>20</th></tr>
+<tr><th>文字              </th><td>み</td><td>ゆ</td><td>け</td><td>そ</td><td>て</td><td>- </td><td>ぬ</td><td>ひ</td><td>る</td><td>が</td><td>む</td><td>が</td><td>ご</td><td>- </td><td>ぜ</td><td>づ</td><td>び</td><td>あ</td><td>お</td><td>- </td><td>の</td><td>ほ</td><td>め</td></tr>
+<tr><th>文字の差(８進数)  </th><td>37</td><td>05</td><td>44</td><td>06</td><td>04</td><td>- </td><td>04</td><td>04</td><td>16</td><td>04</td><td>64</td><td>14</td><td>04</td><td>- </td><td>04</td><td>04</td><td>04</td><td>04</td><td>04</td><td>- </td><td>24</td><td>05</td><td>04</td></tr>
+</table>
+<p>変わっている箇所は…やっぱり 54 固定の場所(10文字目)が 64 になっていますね。<br/>
+64 - 54 = 10 で名前の４文字目の下から２番目のビットがここということかな。</p>
+<p>さらに続いて勇者「あああ△」アイテム無しです。</p>
+<table border="1" summary="名前「あああ△」アイテム無し">
+<caption>名前「あああ△」アイテム無し</caption>
+<tr><th>文字位置          </th><th>+1</th><th>+2</th><th>+3</th><th>+4</th><th>+5</th><th>- </th><th>+6</th><th>+7</th><th>+8</th><th>+9</th><th>10</th><th>11</th><th>12</th><th>- </th><th>13</th><th>14</th><th>15</th><th>16</th><th>17</th><th>- </th><th>18</th><th>19</th><th>20</th></tr>
+<tr><th>文字              </th><td>ど</td><td>べ</td><td>も</td><td>る</td><td>が</td><td>- </td><td>ご</td><td>お</td><td>て</td><td>ぬ</td><td>ぬ</td><td>ほ</td><td>め</td><td>- </td><td>よ</td><td>れ</td><td>ぎ</td><td>ざ</td><td>ぞ</td><td>- </td><td>こ</td><td>そ</td><td>て</td></tr>
+<tr><th>文字の差(８進数)  </th><td>72</td><td>04</td><td>44</td><td>06</td><td>04</td><td>- </td><td>04</td><td>24</td><td>16</td><td>04</td><td>00</td><td>07</td><td>04</td><td>- </td><td>04</td><td>04</td><td>04</td><td>04</td><td>04</td><td>- </td><td>24</td><td>05</td><td>04</td></tr>
+</table>
+<p>空白が 63 ( 10 進数 ) であるという<strong>仮定</strong>であれば、
+ここで変わるビットが、４文字目の全ビットということでしょう。<br/>
+で、変わっている箇所は、
+例の 54 のところとその次のところ(10～11文字目)です。<br/>
+54 のところが 00 になっていますね。<br/>
+00 - 54 = 24 ( 8 進数 で mod 64 ) です。<br/>
+あれ？これは、さっきの名前の４文字目の下から２ビット目の位置の
+<strong>仮定</strong>と矛盾しますね。<br/>
+って、ことは名前用の文字コードの<strong>仮定</strong>か
+もしくは 54 を引くという<strong>仮定</strong>のどちらかが間違っているということ…<br/>
+４文字目を色々と変えてみたり、１～３文字目を色々と変えてみれば
+多少は分かるかもしれないが…うーん、先は長そうだ (;_;)<br/>
+とりあえず、根性が無くなったので今日はここまで。</p>
+<p><a href="#index">一覧へ戻る</a></p>
+
+<hr/>
+<h2><a name="d19970718" id="d19970718">勇者「００００」</a></h2>
+<p>【1997/07/18】</p>
+<p>「大技林」の中の勇者「００００」の呪文を眺めていたら、
+差分が全て 04 の様に思えてきました。<br/>
+早速実際に確認してみると…。</p>
+<table border="1" summary="名前「００００」アイテム無し">
+<caption>名前「００００」アイテム無し</caption>
+<tr><th>文字位置          </th><th>+1</th><th>+2</th><th>+3</th><th>+4</th><th>+5</th><th>- </th><th>+6</th><th>+7</th><th>+8</th><th>+9</th><th>10</th><th>11</th><th>12</th><th>- </th><th>13</th><th>14</th><th>15</th><th>16</th><th>17</th><th>- </th><th>18</th><th>19</th><th>20</th></tr>
+<tr><th>文字              </th><td>お</td><td>け</td><td>す</td><td>ち</td><td>な</td><td>- </td><td>の</td><td>へ</td><td>む</td><td>ゆ</td><td>る</td><td>が</td><td>ご</td><td>- </td><td>ぜ</td><td>づ</td><td>び</td><td>あ</td><td>お</td><td>- </td><td>け</td><td>す</td><td>ち</td></tr>
+<tr><th>文字の差(８進数)  </th><td>04</td><td>04</td><td>04</td><td>04</td><td>04</td><td>- </td><td>04</td><td>04</td><td>04</td><td>04</td><td>04</td><td>04</td><td>04</td><td>- </td><td>04</td><td>04</td><td>04</td><td>04</td><td>04</td><td>- </td><td>04</td><td>04</td><td>04</td></tr>
+</table>
+<p>はっ！本当に全部 04 だ (^^;;<br/>
+ということは、差分から４を引く・名前のコードは「０」が 0 かな…</p>
+<ul>
+<li>おけすちな　のへむゆるがご　ぜづびあお　けすち</li>
+<li>かしたとね　ふみやりわぢば　ぼえくした　とねふ</li>
+<li>けたとねふ　みずぢばぼした　とねふみや　りわげ</li>
+<li>こそてぬひ　まじだどべうき　さそてぬひ　まもら</li>
+<li>ゆろぐてぬ　ひまもらろぐじ　だどべうき　さそて</li>
+<li>よれぎつに　はほめよれぞで　ぶいかこせ　つには</li>
+<li>るぎざには　ほざぞでぶこせ　つにはほめ　よれぎ</li>
+<li>れごぜのへ　むぜづびあおけ　すちなのへ　むゆる</li>
+</ul>
+<p>で、差分。もちろん、全部の数字から４を引いてあります。</p>
+<table border="1" summary="名前「００００」アイテム無し（文字の差-4(８進数)）">
+<caption>名前「００００」アイテム無し（文字の差-4(８進数)）</caption>
+<tr><th>文字位置</th><th>+1</th><th>+2</th><th>+3</th><th>+4</th><th>+5</th><th>- </th><th>+6</th><th>+7</th><th>+8</th><th>+9</th><th>10</th><th>11</th><th>12</th><th>- </th><th>13</th><th>14</th><th>15</th><th>16</th><th>17</th><th>- </th><th>18</th><th>19</th><th>20</th></tr>
+<tr><th>１つ目  </th><td>00</td><td>00</td><td>00</td><td>00</td><td>00</td><td>- </td><td>00</td><td>00</td><td>00</td><td>00</td><td>00</td><td>00</td><td>00</td><td>- </td><td>00</td><td>00</td><td>00</td><td>00</td><td>00</td><td>- </td><td>00</td><td>00</td><td>00</td></tr>
+<tr><th>２つ目  </th><td>01</td><td>02</td><td>00</td><td>00</td><td>00</td><td>- </td><td>00</td><td>00</td><td>00</td><td>00</td><td>00</td><td>10</td><td>00</td><td>- </td><td>00</td><td>00</td><td>00</td><td>00</td><td>00</td><td>- </td><td>00</td><td>00</td><td>00</td></tr>
+<tr><th>３つ目  </th><td>04</td><td>03</td><td>00</td><td>00</td><td>00</td><td>- </td><td>00</td><td>20</td><td>00</td><td>00</td><td>00</td><td>10</td><td>00</td><td>- </td><td>00</td><td>00</td><td>00</td><td>00</td><td>00</td><td>- </td><td>00</td><td>00</td><td>00</td></tr>
+<tr><th>４つ目  </th><td>05</td><td>01</td><td>00</td><td>00</td><td>00</td><td>- </td><td>00</td><td>20</td><td>00</td><td>00</td><td>00</td><td>00</td><td>00</td><td>- </td><td>00</td><td>00</td><td>00</td><td>00</td><td>00</td><td>- </td><td>00</td><td>00</td><td>00</td></tr>
+<tr><th>５つ目  </th><td>40</td><td>02</td><td>00</td><td>40</td><td>00</td><td>- </td><td>00</td><td>00</td><td>00</td><td>00</td><td>00</td><td>00</td><td>00</td><td>- </td><td>00</td><td>00</td><td>00</td><td>00</td><td>00</td><td>- </td><td>00</td><td>00</td><td>00</td></tr>
+<tr><th>６つ目  </th><td>41</td><td>00</td><td>00</td><td>40</td><td>00</td><td>- </td><td>00</td><td>00</td><td>00</td><td>00</td><td>00</td><td>10</td><td>00</td><td>- </td><td>00</td><td>00</td><td>00</td><td>00</td><td>00</td><td>- </td><td>00</td><td>00</td><td>00</td></tr>
+<tr><th>７つ目  </th><td>44</td><td>01</td><td>00</td><td>40</td><td>00</td><td>- </td><td>00</td><td>20</td><td>00</td><td>00</td><td>00</td><td>10</td><td>00</td><td>- </td><td>00</td><td>00</td><td>00</td><td>00</td><td>00</td><td>- </td><td>00</td><td>00</td><td>00</td></tr>
+<tr><th>８つ目  </th><td>45</td><td>03</td><td>00</td><td>40</td><td>00</td><td>- </td><td>00</td><td>20</td><td>00</td><td>00</td><td>00</td><td>00</td><td>00</td><td>- </td><td>00</td><td>00</td><td>00</td><td>00</td><td>00</td><td>- </td><td>00</td><td>00</td><td>00</td></tr>
+</table>
+
+<p>チェックコードは以下の、全部で 8 bit かな。<br/>
+それとも最初の文字は全部がチェックコードなのかなぁ。</p>
+<table border="1" summary="チェックコードらしき箇所 ver.2(８進数)">
+<caption>チェックコードらしき箇所 ver.2(８進数)</caption>
+<tr><th>文字位置</th><th>+1</th><th>+2</th><th>+3</th><th>+4</th><th>+5</th><th>- </th><th>+6</th><th>+7</th><th>+8</th><th>+9</th><th>10</th><th>11</th><th>12</th><th>- </th><th>13</th><th>14</th><th>15</th><th>16</th><th>17</th><th>- </th><th>18</th><th>19</th><th>20</th></tr>
+<tr><th>コード  </th><td>45</td><td>03</td><td>00</td><td>40</td><td>00</td><td>- </td><td>00</td><td>20</td><td>00</td><td>00</td><td>00</td><td>10</td><td>00</td><td>- </td><td>00</td><td>00</td><td>00</td><td>00</td><td>00</td><td>- </td><td>00</td><td>00</td><td>00</td></tr>
+</table>
+
+<p>差分から４を引いている。チェックビットも削除している。先頭１文字目も無視。</p>
+<ul>
+<li>00 00 40 02 00 00 00 12 00 50 00 00 00 00 00 00 00 20 01 00 - 「ああああ」</li>
+<li>00 00 40 02 00 00 00 12 00 54 00 00 00 00 00 00 00 20 01 00 - 「あああい」</li>
+<li>00 00 40 02 00 00 00 12 00 60 00 00 00 00 00 00 00 20 01 00 - 「あああう」</li>
+<li>00 00 40 02 00 00 00 12 00 64 00 00 00 00 00 00 00 20 01 00 - 「あああえ」</li>
+<li>00 00 40 02 00 00 00 12 00 70 00 00 00 00 00 00 00 20 01 00 - 「あああお」</li>
+<li>00 00 40 02 00 00 00 12 00 74 00 00 00 00 00 00 00 20 01 00 - 「あああか」</li>
+<li>00 00 40 02 00 00 00 12 00 00 01 00 00 00 00 00 00 20 01 00 - 「あああき」</li>
+<li>00 00 40 02 00 00 00 12 00 00 02 00 00 00 00 00 00 20 01 00 - 「あああぬ」</li>
+<li>00 00 40 02 00 00 00 12 00 74 03 00 00 00 00 00 00 20 01 00 - 「あああ△」</li>
+<li>00 00 60 17 00 00 00 12 00 74 03 00 00 00 00 00 00 20 01 00 - 「ああ△△」</li>
+<li>00 00 60 17 00 00 00 12 00 74 03 00 00 00 00 00 00 70 07 00 - 「あ△△△」</li>
+</ul>
+
+<table border="1" summary="いろいろな名前　アイテム無し（文字の差-4(８進数)）">
+<caption>いろいろな名前　アイテム無し（文字の差-4(８進数)）</caption>
+<tr><th>文字位置    </th><th>+1</th><th>+2</th><th>+3</th><th>+4</th><th>+5</th><th>- </th><th>+6</th><th>+7</th><th>+8</th><th>+9</th><th>10</th><th>11</th><th>12</th><th>- </th><th>13</th><th>14</th><th>15</th><th>16</th><th>17</th><th>- </th><th>18</th><th>19</th><th>20</th></tr>
+<tr><th>「ああああ」</th><td>00</td><td>00</td><td>40</td><td>02</td><td>00</td><td>- </td><td>00</td><td>00</td><td>12</td><td>00</td><td>50</td><td>00</td><td>00</td><td>- </td><td>00</td><td>00</td><td>00</td><td>00</td><td>00</td><td>- </td><td>20</td><td>01</td><td>00</td></tr>
+<tr><th>「あああい」</th><td>00</td><td>00</td><td>40</td><td>02</td><td>00</td><td>- </td><td>00</td><td>00</td><td>12</td><td>00</td><td>54</td><td>00</td><td>00</td><td>- </td><td>00</td><td>00</td><td>00</td><td>00</td><td>00</td><td>- </td><td>20</td><td>01</td><td>00</td></tr>
+<tr><th>「あああう」</th><td>00</td><td>00</td><td>40</td><td>02</td><td>00</td><td>- </td><td>00</td><td>00</td><td>12</td><td>00</td><td>60</td><td>00</td><td>00</td><td>- </td><td>00</td><td>00</td><td>00</td><td>00</td><td>00</td><td>- </td><td>20</td><td>01</td><td>00</td></tr>
+<tr><th>「あああえ」</th><td>00</td><td>00</td><td>40</td><td>02</td><td>00</td><td>- </td><td>00</td><td>00</td><td>12</td><td>00</td><td>64</td><td>00</td><td>00</td><td>- </td><td>00</td><td>00</td><td>00</td><td>00</td><td>00</td><td>- </td><td>20</td><td>01</td><td>00</td></tr>
+<tr><th>「あああお」</th><td>00</td><td>00</td><td>40</td><td>02</td><td>00</td><td>- </td><td>00</td><td>00</td><td>12</td><td>00</td><td>70</td><td>00</td><td>00</td><td>- </td><td>00</td><td>00</td><td>00</td><td>00</td><td>00</td><td>- </td><td>20</td><td>01</td><td>00</td></tr>
+<tr><th>「あああか」</th><td>00</td><td>00</td><td>40</td><td>02</td><td>00</td><td>- </td><td>00</td><td>00</td><td>12</td><td>00</td><td>74</td><td>00</td><td>00</td><td>- </td><td>00</td><td>00</td><td>00</td><td>00</td><td>00</td><td>- </td><td>20</td><td>01</td><td>00</td></tr>
+<tr><th>「あああき」</th><td>00</td><td>00</td><td>40</td><td>02</td><td>00</td><td>- </td><td>00</td><td>00</td><td>12</td><td>00</td><td>00</td><td>01</td><td>00</td><td>- </td><td>00</td><td>00</td><td>00</td><td>00</td><td>00</td><td>- </td><td>20</td><td>01</td><td>00</td></tr>
+<tr><th>「あああぬ」</th><td>00</td><td>00</td><td>40</td><td>02</td><td>00</td><td>- </td><td>00</td><td>00</td><td>12</td><td>00</td><td>00</td><td>02</td><td>00</td><td>- </td><td>00</td><td>00</td><td>00</td><td>00</td><td>00</td><td>- </td><td>20</td><td>01</td><td>00</td></tr>
+<tr><th>「あああ△」</th><td>00</td><td>00</td><td>40</td><td>02</td><td>00</td><td>- </td><td>00</td><td>00</td><td>12</td><td>00</td><td>74</td><td>03</td><td>00</td><td>- </td><td>00</td><td>00</td><td>00</td><td>00</td><td>00</td><td>- </td><td>20</td><td>01</td><td>00</td></tr>
+<tr><th>「ああ△△」</th><td>00</td><td>00</td><td>60</td><td>17</td><td>00</td><td>- </td><td>00</td><td>00</td><td>12</td><td>00</td><td>74</td><td>03</td><td>00</td><td>- </td><td>00</td><td>00</td><td>00</td><td>00</td><td>00</td><td>- </td><td>20</td><td>01</td><td>00</td></tr>
+<tr><th>「あ△△△」</th><td>00</td><td>00</td><td>60</td><td>17</td><td>00</td><td>- </td><td>00</td><td>00</td><td>12</td><td>00</td><td>74</td><td>03</td><td>00</td><td>- </td><td>00</td><td>00</td><td>00</td><td>00</td><td>00</td><td>- </td><td>70</td><td>07</td><td>00</td></tr>
+</table>
+
+<p>「あ」が 10 ( 10 進数 ) 、「い」が 11 、「う」が 12 といった感じかな。</p>
+<p>↑ <a href="#index">一覧へ戻る</a></p>
+
+<hr/>
+<h2><a name="d19970719" id="d19970719">名前</a></h2>
+<p>【1997/07/19】</p>
+<p>どうやら、後ろの方から差分を取った方が見やすいようですね。</p>
+<table border="1" summary="いろいろな名前　アイテム無し（文字の差-4(８進数)）">
+<caption>いろいろな名前　アイテム無し（文字の差-4(８進数)）</caption>
+<tr><th>文字位置    </th><th>20</th><th>19</th><th>18</th><th>- </th><th>17</th><th>16</th><th>15</th><th>14</th><th>13</th><th>- </th><th>12</th><th>11</th><th>10</th><th>+9</th><th>+8</th><th>+7</th><th>+6</th><th>- </th><th>+5</th><th>+4</th><th>+3</th><th>+2</th><th>+1</th></tr>
+<tr><th>「ああああ」</th><td>00</td><td>01</td><td>20</td><td>- </td><td>00</td><td>00</td><td>00</td><td>00</td><td>00</td><td>- </td><td>00</td><td>00</td><td>50</td><td>00</td><td>12</td><td>00</td><td>00</td><td>- </td><td>00</td><td>02</td><td>40</td><td>00</td><td>00</td></tr>
+<tr><th>「あああい」</th><td>00</td><td>01</td><td>20</td><td>- </td><td>00</td><td>00</td><td>00</td><td>00</td><td>00</td><td>- </td><td>00</td><td>00</td><td>54</td><td>00</td><td>12</td><td>00</td><td>00</td><td>- </td><td>00</td><td>02</td><td>40</td><td>00</td><td>00</td></tr>
+<tr><th>「あああう」</th><td>00</td><td>01</td><td>20</td><td>- </td><td>00</td><td>00</td><td>00</td><td>00</td><td>00</td><td>- </td><td>00</td><td>00</td><td>60</td><td>00</td><td>12</td><td>00</td><td>00</td><td>- </td><td>00</td><td>02</td><td>40</td><td>00</td><td>00</td></tr>
+<tr><th>「あああえ」</th><td>00</td><td>01</td><td>20</td><td>- </td><td>00</td><td>00</td><td>00</td><td>00</td><td>00</td><td>- </td><td>00</td><td>00</td><td>64</td><td>00</td><td>12</td><td>00</td><td>00</td><td>- </td><td>00</td><td>02</td><td>40</td><td>00</td><td>00</td></tr>
+<tr><th>「あああお」</th><td>00</td><td>01</td><td>20</td><td>- </td><td>00</td><td>00</td><td>00</td><td>00</td><td>00</td><td>- </td><td>00</td><td>00</td><td>70</td><td>00</td><td>12</td><td>00</td><td>00</td><td>- </td><td>00</td><td>02</td><td>40</td><td>00</td><td>00</td></tr>
+<tr><th>「あああか」</th><td>00</td><td>01</td><td>20</td><td>- </td><td>00</td><td>00</td><td>00</td><td>00</td><td>00</td><td>- </td><td>00</td><td>00</td><td>74</td><td>00</td><td>12</td><td>00</td><td>00</td><td>- </td><td>00</td><td>02</td><td>40</td><td>00</td><td>00</td></tr>
+<tr><th>「あああき」</th><td>00</td><td>01</td><td>20</td><td>- </td><td>00</td><td>00</td><td>00</td><td>00</td><td>00</td><td>- </td><td>00</td><td>01</td><td>00</td><td>00</td><td>12</td><td>00</td><td>00</td><td>- </td><td>00</td><td>02</td><td>40</td><td>00</td><td>00</td></tr>
+<tr><th>「あああぬ」</th><td>00</td><td>01</td><td>20</td><td>- </td><td>00</td><td>00</td><td>00</td><td>00</td><td>00</td><td>- </td><td>00</td><td>02</td><td>00</td><td>00</td><td>12</td><td>00</td><td>00</td><td>- </td><td>00</td><td>02</td><td>40</td><td>00</td><td>00</td></tr>
+<tr><th>「あああ△」</th><td>00</td><td>01</td><td>20</td><td>- </td><td>00</td><td>00</td><td>00</td><td>00</td><td>00</td><td>- </td><td>00</td><td>03</td><td>74</td><td>00</td><td>12</td><td>00</td><td>00</td><td>- </td><td>00</td><td>02</td><td>40</td><td>00</td><td>00</td></tr>
+<tr><th>「ああ△△」</th><td>00</td><td>01</td><td>20</td><td>- </td><td>00</td><td>00</td><td>00</td><td>00</td><td>00</td><td>- </td><td>00</td><td>03</td><td>74</td><td>00</td><td>12</td><td>00</td><td>00</td><td>- </td><td>00</td><td>17</td><td>60</td><td>00</td><td>00</td></tr>
+<tr><th>「あ△△△」</th><td>00</td><td>07</td><td>70</td><td>- </td><td>00</td><td>00</td><td>00</td><td>00</td><td>00</td><td>- </td><td>00</td><td>03</td><td>74</td><td>00</td><td>12</td><td>00</td><td>00</td><td>- </td><td>00</td><td>17</td><td>60</td><td>00</td><td>00</td></tr>
+<tr><th>「を△△△」</th><td>00</td><td>07</td><td>70</td><td>- </td><td>00</td><td>00</td><td>00</td><td>00</td><td>00</td><td>- </td><td>00</td><td>03</td><td>74</td><td>00</td><td>66</td><td>00</td><td>00</td><td>- </td><td>00</td><td>17</td><td>60</td><td>00</td><td>00</td></tr>
+<tr><th>「ん△△△」</th><td>00</td><td>07</td><td>70</td><td>- </td><td>00</td><td>00</td><td>00</td><td>00</td><td>00</td><td>- </td><td>00</td><td>03</td><td>74</td><td>00</td><td>67</td><td>00</td><td>00</td><td>- </td><td>00</td><td>17</td><td>60</td><td>00</td><td>00</td></tr>
+<tr><th>「っゃゅょ」</th><td>00</td><td>07</td><td>10</td><td>- </td><td>00</td><td>00</td><td>00</td><td>00</td><td>00</td><td>- </td><td>00</td><td>03</td><td>54</td><td>00</td><td>70</td><td>00</td><td>00</td><td>- </td><td>00</td><td>16</td><td>40</td><td>00</td><td>00</td></tr>
+<tr><th>「゛゜△△」</th><td>00</td><td>07</td><td>50</td><td>- </td><td>00</td><td>00</td><td>00</td><td>00</td><td>00</td><td>- </td><td>00</td><td>03</td><td>74</td><td>00</td><td>74</td><td>00</td><td>00</td><td>- </td><td>00</td><td>17</td><td>60</td><td>00</td><td>00</td></tr>
+</table>
+
+
+<p>名前の１文字目はおそらく +8 の位置でしょう。<br/>
+２文字目は 20 の下 3bit と 19 の上 3bit 。<br/>
+３文字目は +4 の下 4bit と +3 の上 2bit 。<br/>
+４文字目は 11 の下 2bit と 10 の上 4bit 。</p>
+<p>名前用のコードは以下のようになっているようです。</p>
+<table border="1" summary="名前のコード表">
+<caption>名前のコード表</caption>
+<tr><th>   </th><th>+0</th><th>+1</th><th>+2</th><th>+3</th><th>+4</th></tr>
+<tr><th>+00</th><td>０</td><td>１</td><td>２</td><td>３</td><td>４</td></tr>
+<tr><th>+05</th><td>５</td><td>６</td><td>７</td><td>８</td><td>９</td></tr>
+<tr><th>+10</th><td>あ</td><td>い</td><td>う</td><td>え</td><td>お</td></tr>
+<tr><th>+15</th><td>か</td><td>き</td><td>く</td><td>け</td><td>こ</td></tr>
+<tr><th>+20</th><td>さ</td><td>し</td><td>す</td><td>せ</td><td>そ</td></tr>
+<tr><th>+25</th><td>た</td><td>ち</td><td>つ</td><td>て</td><td>と</td></tr>
+<tr><th>+30</th><td>な</td><td>に</td><td>ぬ</td><td>ね</td><td>の</td></tr>
+<tr><th>+35</th><td>は</td><td>ひ</td><td>ふ</td><td>へ</td><td>ほ</td></tr>
+<tr><th>+40</th><td>ま</td><td>み</td><td>む</td><td>め</td><td>も</td></tr>
+<tr><th>+45</th><td>や</td><td>ゆ</td><td>よ</td></tr>
+<tr><th>+48</th><td>ら</td><td>り</td><td>る</td><td>れ</td><td>ろ</td></tr>
+<tr><th>+53</th><td>わ</td><td>を</td><td>ん</td></tr>
+<tr><th>+56</th><td>っ</td><td>ゃ</td><td>ゅ</td><td>ょ</td></tr>
+<tr><th>+60</th><td>゛</td><td>゜</td><td>ー</td><td>△</td></tr>
+</table>
+
+<p>↑ <a href="#index">一覧へ戻る</a></p>
+
+<hr/>
+<h2><a name="d19970720" id="d19970720">各データ</a></h2>
+<p>【1997/07/20】</p>
+<p>名前以外のデータも大体把握できました。<br/>
+面倒なんで、結果だけ (^^;;<br/>
+それと 8bit 毎に区切り直した方が見やすいようなので、そうなってます。</p>
+<ol>
+<li>アイテム２番目(4bit)＋１番目(4bit)</li>
+<li>鱗装備(1bit)＋名前２文字目(6bit)＋未使用(1bit)</li>
+<li>経験値上(8bit)</li>
+<li>アイテム６番目(4bit)＋５番目(4bit)</li>
+<li>鍵(4bit)＋薬草(4bit)</li>
+<li>所持金上(8bit)</li>
+<li>武器(3bit)＋鎧(3bit)＋盾(2bit)</li>
+<li>チェックコード(1bit)＋未使用(1bit)＋名前４文字目(6bit)</li>
+<li>アイテム８番目(4bit)＋７番目(4bit)</li>
+<li>名前１文字目(6bit)＋未使用(1bit)＋チェックコード(1bit)</li>
+<li>所持金下(8bit)</li>
+<li>アイテム４番目(4bit)＋３番目(4bit)</li>
+<li>チェックコード(1bit)＋未使用(1bit)＋名前３文字目(6bit)</li>
+<li>経験値下(8bit)</li>
+<li>チェックコード(8bit)</li>
+</ol>
+<p>鱗装備というのは、「りゅうのうろこ」を身に付けたことがあるかどうかです。<br/>
+「未使用」といっているものが本当に未使用かは分かりません。<br/>
+1bit 単位のチェックコードは８パターンある復活の呪文のキーじゃないかと思っています。</p>
+<p>かなりのデータが分かり、なんとなくもう少しで復活の呪文の捏造ができるような気になりますが、
+実際には最後のそして最大の難関が手付かずのままのこってますね。
+つまり、チェックコードの計算方法 (^^;</p>
+<p>↑ <a href="#index">一覧へ戻る</a></p>
+
+<hr/>
+<h2><a name="d19970722" id="d19970722">チェックコード</a></h2>
+<p>【1997/07/22】</p>
+<p>チェックコードの解析ですね。気が重いなぁ (--;;<br/>
+とりあえず、勇者「００００」でしょう。</p>
+<ul>
+<li>00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 - EXP 0</li>
+<li>00 00 00 00 00 00 00 00 00 00 00 00 00 01 61 - EXP 1</li>
+<li>00 00 00 00 00 00 00 00 00 00 00 00 00 02 c2 - EXP 2</li>
+<li>00 00 00 00 00 00 00 00 00 00 00 00 00 03 a3 - EXP 3</li>
+<li>00 00 00 00 00 00 00 00 00 00 00 00 00 04 a5 - EXP 4</li>
+<li>00 00 00 00 00 00 00 00 00 00 00 00 00 05 c4 - EXP 5</li>
+</ul>
+<p>例の 8bit 毎に切り直した結果を 16 進数で表しています。</p>
+<p>0x61 * 2 = 0xc2 ですが…偶然かな？<br/>
+それよりも 0x61 xor 0xc2 = 0xa3 の方が気になりますね。<br/>
+それに 0x61 xor 0xa5 = 0xc4 …<br/>
+どうやら、各 bit がある数値と括りついていてそれらの
+xor がチェックコードということかな？</p>
+<p>…いろいろ検証してみたが、どうやらそーらしい。<br/>
+でも、 14 byte * 8 = 112 bit 分もマジックナンバーがあるの？ (;_;)<br/>
+おそらくはいくつかの数字から計算で求められるんじゃないかとおもいますが、
+それを調べるのは、 112 個のデータを集めないと… (T^T)</p>
+<p>↑ <a href="#index">一覧へ戻る</a></p>
+
+<hr/>
+<h2><a name="d19970725" id="d19970725">完成！！かな？</a></h2>
+<p>【1997/07/25】</p>
+<p>ここ数日ひたすらチェックコードを解析していました。<br/>
+で、結果。<br/>
+一番左に書いてあるのが最上位ビット、
+一番右のが最下位ビットと括りついたマジックナンバーです。</p>
+<ol>
+<li>0x88 0xc4 0x62 0x31 0x08 0x84 0x42 0x21</li>
+<li>0x98 0xcc 0xe6 0x73 0xa9 0xc4 0x62 <strong>0x00</strong></li>
+<li>0x5a 0xad 0xc6 0x63 0xa1 0xc0 0x60 0x30</li>
+<li>0x38 0x9c 0x4e 0xa7 0xc3 0xf1 0x68 0xb4</li>
+<li><strong>0x00</strong> 0x68 0xb4 0x5a <strong>0x00</strong> 0x06 0x83 0x51</li>
+<li>0x20 0x10 0x08 0x84 0x42 0xa1 0x40 0xa0</li>
+<li>0xf9 0xec 0xf6 0x7b 0xad 0xc6 0xe3 0x61</li>
+<li>0x81 0xd0 0x68 0xb4 0xda 0x6d 0xa6 0xd3</li>
+<li>0xb2 0xd9 0xfc 0xfe 0xff 0xef 0x67 0x23</li>
+<li>0x34 0x1a 0x0d 0x96 0x4b 0x35 0x8a 0x45</li>
+<li>0xaa 0xd5 0x7a 0x3d 0x8e 0x47 0xb3 0x49</li>
+<li>0xa1 0x40 0xa0 0x50 0xa8 0xd4 0xea 0x75</li>
+<li>0xa0 <strong>0x00</strong> 0x68 0xb4 0x5a 0xad 0xc6 0x63</li>
+<li>0x7e 0xbf 0xcf 0xf7 0x6b 0xa5 0xc2 0x61</li>
+</ol>
+<p>こんな感じでした。<br/>
+<strong>0x00</strong> の所はチェックできていません。<br/>
+それと 8byte 目の上から 2bit 目は王女の所のドラゴンを倒したかどうか、だと思います。<br/>
+同様に 10byte 目の下から 2bit 目はゴーレムを倒したかどうか、かな。<br/>
+とゆうことは、ほかの未使用ビットも意味があるのかなぁ。</p>
+<p>それとなんとなく規則が見えそうで、でも良く分からないです <samp>(^^;;</samp><br/>
+上位 4bit と下位 4bit は別に見る。<br/>
+下位 4bit は 0x08 → 0x0c → 0x06 → 0x03 → 0x09 → 0x04 → 0x02 → ?? の様に
+1bit づつ 8 段階にシフトしているのかな。<br/>
+上位 4bit は…同様にシフトしているけど 4 段階ってことなのか？<br/>
+でも違うところもあるなぁ。単純にミスだったりして <samp>^^;;</samp></p>
+<p>ま、いいや。とりあえずここまでで CGI を作って公開しましょ。<br/>
+実際に試してみたいのなら、
+「復活の呪文」資料室までどうぞ。</p>
+<p>↑ <a href="#index">一覧へ戻る</a></p>
+
+<hr/>
+<h2><a name="d19970727" id="d19970727">マジックナンバー</a></h2>
+<p>【1997/07/27】</p>
+<p>前回、マジックナンバーの件で、</p>
+<blockquote>
+<p>それとなんとなく規則が見えそうで、でも良く分からないです (^^;;<br/>
+上位 4bit と下位 4bit は別に見る。<br/>
+下位 4bit は 0x08 → 0x0c → 0x06 → 0x03 → 0x09 → 0x04 → 0x02 → ?? の様に
+1bit づつ 8 段階にシフトしているのかな。<br/>
+上位 4bit は…同様にシフトしているけど 4 段階ってことなのか？<br/>
+でも違うところもあるなぁ。単純にミスだったりして ^^;;</p>
+</blockquote>
+<p>といっていましたが、
+どうやら、下位 5bit と上位 3bit に分かれていたようです。<br/>
+で、どちらも 8 段階にシフトしているようですね。</p>
+<p>↑ <a href="#index">一覧へ戻る</a></p>
+
+<hr/>
+<h2><a name="d19980207" id="d19980207">戦士の指輪</a></h2>
+<p>【1998/02/07】</p>
+<p>実はしばらく前から認識していたのですが、 2byte 目の一番下の bit は
+「戦士の指輪」を装備しているかどうかのようですね。</p>
+<p>↑ <a href="#index">一覧へ戻る</a></p>
+
+<hr/>
+<h2><a name="d19980531" id="d19980531">最後のフラグ</a></h2>
+<p>【1998/05/31】</p>
+<p>情報提供がありまして、
+最後のフラグは「岩山の洞窟」で「死の首飾り」を
+入手したかどうかのようです。
+実はまだ確認していないのですが…。</p>
+<p>また、チェックコードの求め方ですが、 DQ2 と同じく
+CRC を求めているだけのようです。以下のような感じですね
+( x[] にデータが入っているとする ) 。</p>
+<pre class="CODE">
+    int i, j, l, k, cd ;
+
+    cd = 0x0000 ;
+    for ( i = 1 ; i &lt; 15 ; i ++ ) {
+
+        l = x[i] &lt;&lt; 8 ;
+        for ( j = 8 ; j != 0 ; j -- ) {
+
+            k = ( cd ^ l ) ;
+
+            cd = ( cd &lt;&lt; 1 ) &amp; 0xffff ;
+            l &lt;&lt;= 1 ;
+
+            if ( ( k &amp; 0x8000 ) != 0 ) {
+                cd ^= 0x1021 ;
+            }
+
+        }
+    }
+    x[0] = cd &amp; 0xff ;
+</pre>
+
+<p>ですので、例のマジックナンバーは、
+以下のようなコーディングで求める事ができると思います。</p>
+
+<pre class="CODE">
+    int cd = 0x8000 ;
+    for ( int i = 0 ; i &lt; xx ; i ++ ) {
+        if ( cd &amp; 0x8000 ) {
+            cd = ( cd &lt;&lt; 1 ) ^ 0x1021 ;
+        } else {
+            cd &lt;&lt;= 1 ;
+        }
+        printf("%.2x\n", cd &amp; 0xff) ;
+    }
+</pre>
+<p>結果：（先頭の下のビットから順番に）</p>
+<pre>
+    0x21
+    0x42
+    0x84
+    0x08
+    0x31
+    0x62
+    0xc4
+    0x88
+    0x31
+    0x62
+    0xc4
+    0xa9
+    0x73
+    0xe6
+    0xcc
+    0x98
+     …
+</pre>
+
+<p>マジックナンバーの完全版は、以下の通り</p>
+
+<ol>
+<li>0x88 0xc4 0x62 0x31 0x08 0x84 0x42 0x21</li>
+<li>0x98 0xcc 0xe6 0x73 0xa9 0xc4 0x62 0x31</li>
+<li>0x5a 0xad 0xc6 0x63 0xa1 0xc0 0x60 0x30</li>
+<li>0x38 0x9c 0x4e 0xa7 0xc3 0xf1 0x68 0xb4</li>
+<li>0xd0 0x68 0xb4 0x5a 0x2d 0x06 0x83 0x51</li>
+<li>0x20 0x10 0x08 0x84 0x42 0xa1 0x40 0xa0</li>
+<li>0xf9 0xec 0xf6 0x7b 0xad 0xc6 0xe3 0x61</li>
+<li>0x81 0xd0 0x68 0xb4 0xda 0x6d 0xa6 0xd3</li>
+<li>0xb2 0xd9 0xfc 0xfe 0xff 0xef 0x67 0x23</li>
+<li>0x34 0x1a 0x0d 0x96 0x4b 0x35 0x8a 0x45</li>
+<li>0xaa 0xd5 0x7a 0x3d 0x8e 0x47 0xb3 0x49</li>
+<li>0xa1 0x40 0xa0 0x50 0xa8 0xd4 0xea 0x75</li>
+<li>0xa0 0xd0 0x68 0xb4 0x5a 0xad 0xc6 0x63</li>
+<li>0x7e 0xbf 0xcf 0xf7 0x6b 0xa5 0xc2 0x61</li>
+</ol>
+
+<p>↑ <a href="#index">一覧へ戻る</a></p>
+
+<hr/>
+<h2><a name="d20010714" id="d20010714">各データの最終版</a></h2>
+<p>相変わらず 8bit 毎に区切り直してあります。</p>
+<ol>
+<li>アイテム２番目(4bit)＋１番目(4bit)</li>
+<li>鱗装備(1bit)＋名前２文字目(6bit)＋戦士の指輪装備有無(1bit)</li>
+<li>経験値上(8bit)</li>
+<li>アイテム６番目(4bit)＋５番目(4bit)</li>
+<li>鍵(4bit)＋薬草(4bit)</li>
+<li>所持金上(8bit)</li>
+<li>武器(3bit)＋鎧(3bit)＋盾(2bit)</li>
+<li>チェックコード(1bit)＋見張りのドラゴンを倒したか(1bit)＋名前４文字目(6bit)</li>
+<li>アイテム８番目(4bit)＋７番目(4bit)</li>
+<li>名前１文字目(6bit)＋ゴーレムを倒したか(1bit)＋チェックコード(1bit)</li>
+<li>所持金下(8bit)</li>
+<li>アイテム４番目(4bit)＋３番目(4bit)</li>
+<li>チェックコード(1bit)＋死の首飾り入手済(1bit)＋名前３文字目(6bit)</li>
+<li>経験値下(8bit)</li>
+<li>チェックコード(8bit)</li>
+</ol>
+<p>順番を戻して、6bit 毎つまり文字単位に切ると以下の通り。
+制限のあるもの（チェックコードやアイテム、それに鍵・薬草など）を強調してあります。
+また、５文字，７文字，５文字，３文字に区切って、間に（空白）と記述しておきます。</p>
+<ol>
+<li><strong>チェックコード下(6bit)</strong></li>
+<li>経験値４(4bit)＋<strong>チェックコード上(2bit)</strong></li>
+<li>名前３文字目の下(2bit)＋経験値３(4bit)</li>
+<li>チェックコード(1bit)＋死の首飾り入手済(1bit)＋名前３文字目の上(4bit)</li>
+<li><strong>アイテム４番目の下(2bit)</strong>＋<strong>アイテム３番目(4bit)</strong><br/>
+	（空白）</li>
+<li>所持金４(4bit)＋<strong>アイテム４番目の上(2bit)</strong></li>
+<li>ゴーレムを倒したか(1bit)＋<strong>チェックコード(1bit)</strong>＋所持金３(4bit)</li>
+<li>名前１文字目(6bit)</li>
+<li><strong>アイテム８番目の下(2bit)</strong><strong>アイテム７番目(4bit)</strong></li>
+<li>名前４文字目の下(4bit)＋<strong>アイテム８番目の上(2bit)</strong></li>
+<li>盾(2bit)＋<strong>チェックコード(1bit)</strong>＋見張りのドラゴンを倒したか(1bit)＋名前４文字目の上(2bit)</li>
+<li>武器(3bit)＋鎧(3bit)<br/>
+	（空白）</li>
+<li>所持金２(6bit)</li>
+<li><strong>薬草(4bit)</strong>＋所持金１(2bit)</li>
+<li><strong>アイテム５番目の下(2bit)</strong>＋<strong>鍵(4bit)</strong></li>
+<li><strong>アイテム６番目(4bit)</strong>＋<strong>アイテム５番目の上(2bit)</strong></li>
+<li>経験値２(6bit)<br/>
+	（空白）</li>
+<li>名前２文字目の下(3bit)＋戦士の指輪装備有無(1bit)＋経験値１(2bit)</li>
+<li><strong>アイテム１番目の下(2bit)</strong>＋鱗装備(1bit)＋名前２文字目の上(3bit)</li>
+<li><strong>アイテム２番目(4bit)</strong>＋<strong>アイテム１番目の上(2bit)</strong></li>
+</ol>
+
+<hr/>
+<p>[ Back to DQ-Password Room ]
+[ Top ]</p>
+<address>
+Since: Jul. 17, 1997<br/>
+Author: SATOH_Yoshiyuki &lt;yotti&#x40;*****.or.jp&gt;<br/>
+</address>
+</body>
+</html>
