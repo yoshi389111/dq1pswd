@@ -113,24 +113,6 @@ const LEVELS: ReadonlyArray<number> = [
     2900, 4000, 5500, 7500, 10000, 13000, 17000, 21000, 25000, 29000,
     33000, 37000, 41000, 45000, 49000, 53000, 57000, 61000, 65000, 65535];
 
-/** チェックコード(CRC)計算用マジックナンバー */
-const CHECK_CODE: ReadonlyArray<number> = [
-    0x88, 0xc4, 0x62, 0x31, 0x08, 0x84, 0x42, 0x21,
-    0x98, 0xcc, 0xe6, 0x73, 0xa9, 0xc4, 0x62, 0x31,
-    0x5a, 0xad, 0xc6, 0x63, 0xa1, 0xc0, 0x60, 0x30,
-    0x38, 0x9c, 0x4e, 0xa7, 0xc3, 0xf1, 0x68, 0xb4,
-    0xd0, 0x68, 0xb4, 0x5a, 0x2d, 0x06, 0x83, 0x51,
-    0x20, 0x10, 0x08, 0x84, 0x42, 0xa1, 0x40, 0xa0,
-    0xf9, 0xec, 0xf6, 0x7b, 0xad, 0xc6, 0xe3, 0x61,
-    0x81, 0xd0, 0x68, 0xb4, 0xda, 0x6d, 0xa6, 0xd3,
-    0xb2, 0xd9, 0xfc, 0xfe, 0xff, 0xef, 0x67, 0x23,
-    0x34, 0x1a, 0x0d, 0x96, 0x4b, 0x35, 0x8a, 0x45,
-    0xaa, 0xd5, 0x7a, 0x3d, 0x8e, 0x47, 0xb3, 0x49,
-    0xa1, 0x40, 0xa0, 0x50, 0xa8, 0xd4, 0xea, 0x75,
-    0xa0, 0xd0, 0x68, 0xb4, 0x5a, 0xad, 0xc6, 0x63,
-    0x7e, 0xbf, 0xcf, 0xf7, 0x6b, 0xa5, 0xc2, 0x61
-];
-
 /** 選択肢 */
 export interface LabelInfo {
     /** id */
@@ -324,14 +306,18 @@ export class Dq1Password {
     private calcuteCrc(bytes: Array<number>): number {
         // 最後の１バイトを除いた分の CRC を計算する
         let crc = 0;
-        for (let i = 0; i < CODE_LENGTH - 1; i++) {
+        for (let i = 1; i < CODE_LENGTH; i++) {
+            let octed = bytes[i];
             for (let j = 0; j < 8; j++) {
-                if ((bytes[i] & (0x80 >> j)) !== 0) {
-                    crc ^= CHECK_CODE[i * 8 + j];
+                const carryBit = (((crc >> 8) ^ octed) & 0x80) !== 0;
+                crc = (crc << 1) & 0xffff;
+                octed = (octed << 1) & 0xff;
+                if (carryBit) {
+                    crc ^= 0x1021;
                 }
             }
         }
-        return crc;
+        return crc & 0xff;
     }
 
     /**
@@ -344,36 +330,35 @@ export class Dq1Password {
 
         // バイト単位に詰める
         const bytes = [
-            (info.items[1] << 4) | info.items[0],
-            (info.dragonScale ? 0x80 : 0) | (nameNums[1] << 1) | (info.fighterRing ? 1 : 0),
-            (info.exp >> 8) & 0xff,
-            (info.items[5] << 4) | info.items[4],
-            (info.key << 4) | (info.herb),
-            (info.gold >> 8) & 0xff,
-            (info.wapon << 5) | (info.armor << 2) | info.shild,
-            ((info.cryptKey << 5) & 0x80) | (info.dragonSlayered ? 0x40 : 0) | nameNums[3],
-            (info.items[7] << 4) | info.items[6],
-            (nameNums[0] << 2) | (info.golemSlayered ? 0x02 : 0) | ((info.cryptKey >> 1) & 0x01),
-            info.gold & 0xff,
-            (info.items[3] << 4) | info.items[2],
-            ((info.cryptKey << 7) & 0x80) | (info.deadAmulet ? 0x40 : 0) | nameNums[2],
-            info.exp & 0xff,
             0,
+            info.exp & 0xff,
+            ((info.cryptKey << 7) & 0x80) | (info.deadAmulet ? 0x40 : 0) | nameNums[2],
+            (info.items[3] << 4) | info.items[2],
+            info.gold & 0xff,
+            (nameNums[0] << 2) | (info.golemSlayered ? 0x02 : 0) | ((info.cryptKey >> 1) & 0x01),
+            (info.items[7] << 4) | info.items[6],
+            ((info.cryptKey << 5) & 0x80) | (info.dragonSlayered ? 0x40 : 0) | nameNums[3],
+            (info.wapon << 5) | (info.armor << 2) | info.shild,
+            (info.gold >> 8) & 0xff,
+            (info.key << 4) | (info.herb),
+            (info.items[5] << 4) | info.items[4],
+            (info.exp >> 8) & 0xff,
+            (info.dragonScale ? 0x80 : 0) | (nameNums[1] << 1) | (info.fighterRing ? 1 : 0),
+            (info.items[1] << 4) | info.items[0],
         ];
 
         // チェックコード(CRC)を計算する
         const crc = this.calcuteCrc(bytes);
-        bytes[14] = crc;
+        bytes[0] = crc;
 
         // バイト単位データを、文字(6bit)単位に変換
-        // 合わせて、順番（前後）を入れ替える
         const codes = [];
-        for (let i = CODE_LENGTH - 1; i >= 0; i -= 3) {
-            const work = (bytes[i - 2] << 16) | (bytes[i - 1] << 8) | (bytes[i]);
-            codes.push(work & 0x3f);
-            codes.push((work >> 6) & 0x3f);
-            codes.push((work >> 12) & 0x3f);
-            codes.push((work >> 18) & 0x3f);
+        for (let i = 0; i < CODE_LENGTH; i += 3) {
+            const bit24 = (bytes[i + 2] << 16) | (bytes[i + 1] << 8) | (bytes[i]);
+            codes.push(bit24 & 0x3f);
+            codes.push((bit24 >> 6) & 0x3f);
+            codes.push((bit24 >> 12) & 0x3f);
+            codes.push((bit24 >> 18) & 0x3f);
         }
 
         // 4 とひとつ前のコードを足していく
@@ -409,56 +394,56 @@ export class Dq1Password {
 
         // 文字(6bit)単位を、バイト単位に変換
         const bytes = [];
-        for (let i = JUMON_LENGTH - 1; i >= 0; i -= 4) {
-            const work = (codes[i] << 18) | (codes[i - 1] << 12) | (codes[i - 2] << 6) | codes[i - 3];
-            bytes.push((work >> 16) & 0xff);
-            bytes.push((work >> 8) & 0xff);
-            bytes.push(work & 0xff);
+        for (let i = 0; i < JUMON_LENGTH; i += 4) {
+            const bit24 = (codes[i + 3] << 18) | (codes[i + 2] << 12) | (codes[i + 1] << 6) | codes[i];
+            bytes.push(bit24 & 0xff);
+            bytes.push((bit24 >> 8) & 0xff);
+            bytes.push((bit24 >> 16) & 0xff);
         }
 
         // チェックコード(CRC)を計算する. 0 なら OK
         const crc = this.calcuteCrc(bytes);
-        bytes[14] ^= crc;
+        bytes[0] ^= crc;
 
         const name = this.toStringName([
-            (bytes[9] >> 2) & 0x3f,
-            (bytes[1] >> 1) & 0x3f,
-            (bytes[12]) & 0x3f,
+            (bytes[5] >> 2) & 0x3f,
+            (bytes[13] >> 1) & 0x3f,
+            (bytes[2]) & 0x3f,
             (bytes[7]) & 0x3f,
         ]);
 
         const items = [
-            bytes[0] & 0x0f,
-            (bytes[0] >> 4) & 0x0f,
-            bytes[11] & 0x0f,
-            (bytes[11] >> 4) & 0x0f,
+            bytes[14] & 0x0f,
+            (bytes[14] >> 4) & 0x0f,
             bytes[3] & 0x0f,
             (bytes[3] >> 4) & 0x0f,
-            bytes[8] & 0x0f,
-            (bytes[8] >> 4) & 0x0f,
+            bytes[11] & 0x0f,
+            (bytes[11] >> 4) & 0x0f,
+            bytes[6] & 0x0f,
+            (bytes[6] >> 4) & 0x0f,
         ];
 
-        const exp = bytes[2] * 256 + bytes[13];
+        const exp = bytes[12] * 256 + bytes[1];
         const cryptKey = ((bytes[7] >> 5) & 0x04) |
-            ((bytes[9] << 1) & 0x02) |
-            ((bytes[12] >> 7) & 0x01);
+            ((bytes[5] << 1) & 0x02) |
+            ((bytes[2] >> 7) & 0x01);
 
         const info: Dq1PasswordInfo = {
             name: name,
-            wapon: (bytes[6] >> 5) & 0x07,
-            armor: (bytes[6] >> 2) & 0x07,
-            shild: bytes[6] & 0x03,
+            wapon: (bytes[8] >> 5) & 0x07,
+            armor: (bytes[8] >> 2) & 0x07,
+            shild: bytes[8] & 0x03,
             items: items,
-            key: (bytes[4] >> 4) & 0x0f,
-            herb: bytes[4] & 0x0f,
+            key: (bytes[10] >> 4) & 0x0f,
+            herb: bytes[10] & 0x0f,
             exp: exp,
-            gold: bytes[5] * 256 + bytes[10],
-            dragonScale: (((bytes[1] >> 7) & 0x01) !== 0),
-            fighterRing: (((bytes[1]) & 0x01) !== 0),
+            gold: bytes[9] * 256 + bytes[4],
+            dragonScale: (((bytes[13] >> 7) & 0x01) !== 0),
+            fighterRing: (((bytes[13]) & 0x01) !== 0),
             dragonSlayered: (((bytes[7] >> 6) & 0x01) !== 0),
-            golemSlayered: (((bytes[9] >> 1) & 0x01) !== 0),
-            deadAmulet: (((bytes[12] >> 6) & 0x01) !== 0),
-            checkCode: bytes[CODE_LENGTH - 1],
+            golemSlayered: (((bytes[5] >> 1) & 0x01) !== 0),
+            deadAmulet: (((bytes[2] >> 6) & 0x01) !== 0),
+            checkCode: bytes[0],
             cryptKey: cryptKey,
             level: this.toLevel(exp),
             valid: false,
