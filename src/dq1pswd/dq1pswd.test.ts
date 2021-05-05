@@ -121,6 +121,7 @@ it("dq1pswd.toNumberName", () => {
     expect(dq1.toNumberName("ぽ　　")).toEqual([39, 61, 63, 63]);
     expect(dq1.toNumberName("ｱｲｳｴ")).toEqual([10, 11, 12, 13]);
     expect(dq1.toNumberName("0123")).toEqual([0, 1, 2, 3]);
+    expect(dq1.toNumberName("ｧｬｦ ")).toEqual([10, 57, 54, 63]);
 });
 
 it("dq1pswd.toStringPassword", () => {
