@@ -1,46 +1,104 @@
-# Getting Started with Create React App
+# ふっかつのじゅもん
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+## 概要
 
-In the project directory, you can run:
+ふっかつのじゅもんを作れます。１の方です。
 
-### `yarn start`
+各種項目を入力して呪文を作る方法と、呪文を入力して妥当性を確認する方法があります。
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### 項目を入力して呪文を作る
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+[ふっかつのじゅもん](https://yoshi389111.github.io/dq1pswd/)のページにいって、初期表示の画面が項目入力画面です。
+（また、後述の呪文入力画面で左下の「項目を入力」ボタンを押すことで、画面遷移します）
 
-### `yarn test`
+４文字までで、名前を入力してください。
+使用できる文字はひらがな（一部使えない文字があります）、数字、スペースのみです。
+濁点、半濁点も一文字として数えます。
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+具体的な使える文字は以下の通りです（見えませんが、スペースも使えます）。
 
-### `yarn build`
+```
+０１２３４５６７８９
+あいうえお
+かきくけこ
+さしすせそ
+たちつてと
+なにぬねの
+はひふへほ
+まみむめも
+やゆよ
+らりるれろ
+わをん
+っゃゅょ
+゛゜－　
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+その他の項目を選択して「呪文を確認」をクリックすると、呪文が表示されます。
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+クリップボードにコピーするか、ツイッターにツイートすることができます。
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### 呪文を入力して妥当性を確認
 
-### `yarn eject`
+[ふっかつのじゅもん](https://yoshi389111.github.io/dq1pswd/)のページにいって、左下の「呪文を入力」ボタンを押すと、呪文入力画面が表示されます。
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+呪文を２０文字で入力してください。
+呪文として使える文字はひらがなだけです（一部使えない文字があります）。
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+濁点・半濁点は、分離せずに１文字と数えます（例：「が」は１文字）。
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+単独の濁点・半濁点の文字は無効です（「か゛」は無効な文字を除外して「か」と判断されます）。
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+具体的な使える文字は以下の通りです。
 
-## Learn More
+```
+あいうえお
+かきくけこ
+さしすせそ
+たちつてと
+なにぬねの
+はひふへほ
+まみむめも
+やゆよ
+らりるれろ
+わ
+がぎぐげご
+ざじずぜぞ
+だぢづでど
+ばびぶべぼ
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+見やすさのため、スペースを入力することもできます（呪文の文字数にはカウントしません）
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+右下の「呪文を確認」ボタンを押すと、呪文をチェックします。
+
+また、ひらがな以外に「？」を入力していると、呪文として使えるパターンが表示されます。
+
+* 例：`ふるいけや　かわずとびこむ　みずのおと　ば？？`
+
+「？」は最大３つまで書けますが、３つ書くと処理に時間がかかるので注意してください。
+
+### 自分の環境で動かす場合
+
+適当に clone して動かしてください。
+
+node.js が必要です。
+
+package.json をみて start（開発中モードのWebが起動）か build（ビルドしたあと既存のwebサービスに登録して使用する）を起動してください。
+
+既存のwebサーバに入れる場合には、パス名を package.json の homepage に登録（パスがなくてルートで動かすなら削除）してください。
+
+### 改造したい場合
+
+個人で使う分には好きに改造してください。
+
+以下を使用しています。
+
+* node.js
+* typescript
+* react
+
+### ライセンス
+
+まだ決めてないです。
+とりあえず、個人で使う分にはお好きにどうぞ。
