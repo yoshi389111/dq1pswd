@@ -304,6 +304,19 @@ export class Dq1Password {
             .join('');
     }
 
+    /**
+     * 呪文に使えない文字を返す
+     * @param password 復活の呪文
+     * @return 呪文に使えない文字
+     */
+    invalidCharsInPassword(password: string): string {
+        const invalidChars = password.replaceAll(/\s/g, '').split('')
+            .map(ch => HANKAKU_TO_ZENKAKU[ch] || ch)
+            .map(ch => JUMON_ALIAS[ch] || ch)
+            .filter(ch => ch !== "？" && !JUMON_ALPHABET.includes(ch));
+        return Array.from(new Set(invalidChars)).join('');
+    }
+
     /** CRC を計算する */
     private calcuteCrc(bytes: Array<number>): number {
         // 最初の１バイトを除いた分の CRC を計算する

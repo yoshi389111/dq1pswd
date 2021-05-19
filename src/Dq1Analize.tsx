@@ -38,6 +38,7 @@ const Dq1Edit: React.FC<Props> = ({
     const [validHerb, setValidHerb] = useState<boolean>(true);
     const [validHatena, setValidHatena] = useState<boolean>(true);
     const [emptyPasswords, setEmptyPasswords] = useState<boolean>(true);
+    const [invalidChars, setInvalidChars] = useState<String>('');
 
     /** 呪文の形式が正しいかチェック */
     const canAnalyze = (password: string): boolean => {
@@ -54,6 +55,8 @@ const Dq1Edit: React.FC<Props> = ({
         setValidKey(true);
         setValidHerb(true);
         setValidHatena(true);
+
+        setInvalidChars(dq1.invalidCharsInPassword(password));
 
         // 呪文を正規化
         const normalize = dq1.toNormalizePassword(password);
@@ -275,6 +278,7 @@ const Dq1Edit: React.FC<Props> = ({
             {!validItem1 && <div>18～20文字目のどこかを変更してね</div> }
             {!validItem2 && <div>19～20文字目のどこかを変更してね</div> }
             {emptyPasswords && <div>対象のふっかつのじゅもんがありません</div> }
+            {invalidChars && <div>次の文字はつかえません「{ invalidChars }」</div> }
             {errorPassword}
         </div>
     );
