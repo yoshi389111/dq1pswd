@@ -115,8 +115,9 @@ package.json をみて start（開発中モードのWebが起動）か build（�
 
 ## ライセンス
 
-まだ決めてないです。
-とりあえず、個人で使う分にはお好きにどうぞ。
+MIT License
+
+Copyright (C) 2021 SATO Yoshiyuki
 
 ## その他のドキュメント
 
