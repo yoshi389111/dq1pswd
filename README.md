@@ -117,7 +117,7 @@ package.json をみて start（開発中モードのWebが起動）か build（�
 
 MIT License
 
-Copyright (C) 2021 SATO Yoshiyuki
+(C) 2021 SATO, Yoshiyuki
 
 ## その他のドキュメント
 
