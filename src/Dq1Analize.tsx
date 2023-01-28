@@ -13,11 +13,7 @@ const dq1 = new dq1pswd.Dq1Password();
 /** 不正な道具 */
 const INVALID_ITEM = 15;
 
-const Dq1Edit: React.FC<Props> = ({
-    password,
-    setPassword,
-    moveEdit,
-}) => {
+const Dq1Edit: React.FC<Props> = (props) => {
     // 入力中の呪文
     const [nowPassword, setNowPassword] = useState<string>('');
     // 詳細表示している呪文
@@ -203,11 +199,11 @@ const Dq1Edit: React.FC<Props> = ({
 
     // 初期表示
     useEffect(() => {
-        if (password) {
-            analyze(password);
+        if (props.password) {
+            analyze(props.password);
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [password])
+    }, [props.password])
 
     let errorPassword = null;
     if (!(validItem1 && validItem2 && validItem3 && validItem4 &&
@@ -293,7 +289,7 @@ const Dq1Edit: React.FC<Props> = ({
                     ].join(' ')}
                     key={index}
                     onClick={() => {
-                        setPassword(pswd.replace("　", ""));
+                        props.setPassword(pswd.replace("　", ""));
                         window.scrollTo(0,0);
                     }}
                 >{dq1.editPassword(pswd)}</div>
@@ -327,7 +323,7 @@ const Dq1Edit: React.FC<Props> = ({
                 <div className="button-area">
                     <span
                         className="button"
-                        onClick={moveEdit}
+                        onClick={props.moveEdit}
                     >項目を入力</span>
                     <span
                         className="button"

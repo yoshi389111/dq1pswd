@@ -54,11 +54,7 @@ const slayerItems: ReadonlyArray<dq1pswd.LabelInfo> = [
     { id: 1, name: "倒した" },
 ];
 
-const Dq1Edit: React.FC<Props> = ({
-    password,
-    setPassword,
-    moveAnalize,
-}) => {
+const Dq1Edit: React.FC<Props> = (props) => {
     const [show, setShow] = useState<boolean>(false);
 
     const [name, setName] = useState<string>('');
@@ -87,10 +83,10 @@ const Dq1Edit: React.FC<Props> = ({
 
     /** App 側のパスワードを取り込む(新規/更新時) */
     useEffect(() => {
-        if (!password) {
+        if (!props.password) {
             return;
         }
-        const info = dq1.analyzePassword(password);
+        const info = dq1.analyzePassword(props.password);
         if (info) {
             setName(info.name.replace(/　+$/, ''));
             setWapon(info.wapon);
@@ -116,7 +112,7 @@ const Dq1Edit: React.FC<Props> = ({
             setCrypt(info.cryptKey);
             setCrc(info.checkCode);
         }
-    }, [password])
+    }, [props.password])
 
     /** 入力内容から復活の呪文を作成 */
     const createPassword = () => {
@@ -140,7 +136,7 @@ const Dq1Edit: React.FC<Props> = ({
             checkCode: 0, // dummy
             valid: false, // dummy
         };
-        return dq1.createPassword(info); 
+        return dq1.createPassword(info);
     }
 
     /** 復活の呪文を表示するためのモーダルダイアログ */
@@ -260,9 +256,9 @@ const Dq1Edit: React.FC<Props> = ({
             </div>
             <div className="footer">
                 <div className="button-area">
-                    <span className="button" onClick={moveAnalize}>呪文を入力</span>
+                    <span className="button" onClick={props.moveAnalize}>呪文を入力</span>
                     <span className="button" onClick={() => {
-                        setPassword(createPassword());
+                        props.setPassword(createPassword());
                         setShow(true);
                     }}>呪文を確認</span>
                 </div>

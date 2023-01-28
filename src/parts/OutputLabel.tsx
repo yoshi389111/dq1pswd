@@ -9,25 +9,21 @@ interface Props {
     error?: boolean;
 }
 
-const OutputLabel: React.FC<Props> = ({
-    label,
-    value,
-    error,
-}) => {
+const OutputLabel: React.FC<Props> = (props) => {
     return (
         <div className="row-line">
             <span
                 className={[
                     "label",
-                    error ? "error" : "",
+                    props.error ? "error" : "",
                 ].join(" ")}
-            >{label}</span>
+            >{props.label}</span>
             <span
                 className={[
                     "value",
-                    error ? "error" : "",
+                    props.error ? "error" : "",
                 ].join(" ")}
-            >{value}</span>
+            >{props.value}</span>
         </div>
     );
 }

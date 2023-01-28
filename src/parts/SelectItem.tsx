@@ -12,41 +12,33 @@ interface Props {
     items: ReadonlyArray<dq1pswd.LabelInfo>
 }
 
-const SelectItem: React.FC<Props> = ({
-    label,
-    value,
-    setValue,
-    items,
-}) => {
+const SelectItem: React.FC<Props> = (props) => {
     const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
         const value = Number(event.target.value);
-        setValue(value);
+        props.setValue(value);
     }
 
-    const options = items.map(item => (
-        <option value={item.id} key={item.id}>{item.name}</option>
-    ));
-
-    const selected = items.find(item => item.id === value);
-    const error = (selected && selected.illegal);
+    const selected = props.items.find(item => item.id === props.value);
+    const error = (selected && selected.illegal) ? "error" : "";
 
     return (
         <div className="row-line">
-            <span
-                className={[
-                    "label",
-                    error ? "error" : "",
-                ].join(" ")}
-            >{label}</span>
+            <span className={`label ${error}`}>
+                {props.label}
+            </span>
             <select
-                className={[
-                    "value",
-                    error ? "error" : "",
-                ].join(" ")}
-                value={value}
+                className={`label ${error}`}
+                value={props.value}
                 onChange={handleChange}
             >
-                {options}
+                {
+                    props.items.map(item => (
+                        <option
+                            key={item.id}
+                            value={item.id}
+                        >{item.name}</option>
+                    ))
+                }
             </select>
         </div>
     );

@@ -7,11 +7,9 @@ interface Props {
     password: string;
 }
 
-const Dq1Info: React.FC<Props> = ({
-    password,
-}) => {
+const Dq1Info: React.FC<Props> = (props) => {
     const dq1 = new dq1pswd.Dq1Password();
-    const info = dq1.analyzePassword(password);
+    const info = dq1.analyzePassword(props.password);
     if (!info) {
         return null;
     }
@@ -28,7 +26,7 @@ const Dq1Info: React.FC<Props> = ({
                     <span
                         className="button"
                         onClick={() => {
-                            utils.clipboardCopy(dq1.editPassword(password));
+                            utils.clipboardCopy(dq1.editPassword(props.password));
                         }}
                     >【コピー】</span>
                     <span
@@ -37,7 +35,7 @@ const Dq1Info: React.FC<Props> = ({
                             info.valid ? "" : "disable",
                         ].join(' ')}
                         onClick={() => {
-                            utils.doTweet(info, password);
+                            utils.doTweet(info, props.password);
                         }}
                     >【ツイート】</span>
                 </div>
