@@ -123,3 +123,5 @@ MIT License
 
 * [奇妙な「復活の呪文」大辞典](./dq1oddpswd.md)
 * [復活の呪文解析日記](./dq1ana.md)
+* Qiita: [[ネタ]復活の呪文を解析してみたよ](https://qiita.com/yoshi389111/items/29ade2f62483e9c095d9)
+* [yoshi389111/dq2pswd](https://github.com/yoshi389111/dq2pswd) - ふっかつのじゅもんを作れます。２の方です。
