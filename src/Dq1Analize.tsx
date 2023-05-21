@@ -162,7 +162,7 @@ const Dq1Edit: React.FC<Props> = (props) => {
         return count === 0 ? true : valid;
     };
 
-    const analyze = (password: string) => {
+    const analyze = async (password: string): Promise<void> => {
         if (!canAnalyze(password)) {
             setPasswords([]);
             setEmptyPasswords(false);
@@ -184,11 +184,9 @@ const Dq1Edit: React.FC<Props> = (props) => {
             setPasswords([]);
             setEmptyPasswords(false);
             setTargetPassword('');
-            process.nextTick(() => {
-                const list = dq1.hatenaPassword(normalized);
-                setPasswords(list);
-                setEmptyPasswords(list.length === 0);
-            });
+            const list = dq1.hatenaPassword(normalized);
+            setPasswords(list);
+            setEmptyPasswords(list.length === 0);
         } else {
             // "？" が含まれない場合は、詳細表示
             setPasswords([]);
@@ -215,42 +213,42 @@ const Dq1Edit: React.FC<Props> = (props) => {
                 <div>
                     <br />
                     <div>
-                        <span>「{normalized.substr(0, 3)}</span>
+                        <span>「{normalized.substring(0, 3)}</span>
                         <span
                             className={(validItem4 && validItem3) ? "" : "error"}
-                        >{normalized.substr(3, 2)}　</span>
+                        >{normalized.substring(3, 5)}　</span>
                         <span
                             className={validItem4 ? "" : "error"}
-                        >{normalized.substr(5, 1)}</span>
-                        <span>{normalized.substr(6, 1)}</span>
+                        >{normalized.substring(5, 6)}</span>
+                        <span>{normalized.substring(6, 7)}</span>
                         <span
                             className={(validItem8 && validItem7) ? "" : "error"}
-                        >{normalized.substr(7, 2)}</span>
+                        >{normalized.substring(7, 9)}</span>
                         <span
                             className={validItem8 ? "" : "error"}
-                        >{normalized.substr(9, 1)}</span>
-                        <span>{normalized.substr(10, 2)}　</span>
+                        >{normalized.substring(9, 10)}</span>
+                        <span>{normalized.substring(10, 12)}　</span>
                     </div>
                     <div>
                         <span
                             className={validHerb ? "" : "error"}
-                        >　{normalized.substr(12, 1)}</span>
+                        >　{normalized.substring(12, 13)}</span>
                         <span
                             className={(validHerb && validItem5 && validKey) ? "" : "error"}
-                        >{normalized.substr(13, 1)}</span>
+                        >{normalized.substring(13, 14)}</span>
                         <span
                             className={(validItem6 && validItem5 && validKey) ? "" : "error"}
-                        >{normalized.substr(14, 1)}</span>
+                        >{normalized.substring(14, 15)}</span>
                         <span
                             className={(validItem6 && validItem5) ? "" : "error"}
-                        >{normalized.substr(15, 1)}</span>
-                        <span>{normalized.substr(16, 1)}　</span>
+                        >{normalized.substring(15, 16)}</span>
+                        <span>{normalized.substring(16, 17)}　</span>
                         <span
                             className={validItem1 ? "" : "error"}
-                        >{normalized.substr(17, 1)}</span>
+                        >{normalized.substring(17, 18)}</span>
                         <span
                             className={(validItem1 && validItem2) ? "" : "error"}
-                        >{normalized.substr(18, 2)}</span>
+                        >{normalized.substring(18, 20)}</span>
                         <span>　　　　」</span>
                     </div>
                 </div>
