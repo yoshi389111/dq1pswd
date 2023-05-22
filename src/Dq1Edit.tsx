@@ -256,7 +256,10 @@ const Dq1Edit: React.FC<Props> = (props) => {
             </div>
             <div className="footer">
                 <div className="button-area">
-                    <span className="button" onClick={props.moveAnalize}>呪文を入力</span>
+                    <span className="button" onClick={() => {
+                        props.setPassword(createPassword());
+                        props.moveAnalize();
+                    }}>呪文を入力</span>
                     <span className="button" onClick={() => {
                         props.setPassword(createPassword());
                         setShow(true);
