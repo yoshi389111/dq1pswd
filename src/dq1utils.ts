@@ -3,7 +3,7 @@ import * as dq1pswd from './dq1pswd/dq1pswd';
 /** 任意の文字列をクリップボードにコピー */
 export const clipboardCopy = async (text: string): Promise<void> => {
     await navigator.clipboard.writeText(text);
-    alert('コピーしました');
+    // alert('コピーしました');
 }
 
 /** 復活の呪文をツイートする */

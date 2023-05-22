@@ -10,6 +10,7 @@ interface Props {
 const Dq1Info: React.FC<Props> = (props) => {
     const dq1 = new dq1pswd.Dq1Password();
     const info = dq1.analyzePassword(props.password);
+    const [showCopied, setShowCopied] = React.useState<boolean>(false);
     if (!info) {
         return null;
     }
@@ -23,13 +24,26 @@ const Dq1Info: React.FC<Props> = (props) => {
                 <OutputLabel label="ＥＸ" value={info.exp.toString()} />
                 <OutputLabel label="Ｇ" value={info.gold.toString()} />
                 <div className="button-area">
-                    <span
-                        className="button"
+                    <div
+                        className={[
+                            "button",
+                            "dialog-target",
+                        ].join(' ')}
                         onClick={() => {
                             utils.clipboardCopy(dq1.editPassword(props.password));
+                            setShowCopied(true);
+                            setTimeout(() => {
+                                setShowCopied(false);
+                            }, 700);
                         }}
-                    >【コピー】</span>
-                    <span
+                    >【コピー】
+                        {showCopied && (
+                            <div className="dialog-copied">
+                                Copied!
+                            </div>
+                        )}
+                    </div>
+                    <div
                         className={[
                             "button",
                             info.valid ? "" : "disable",
@@ -37,7 +51,7 @@ const Dq1Info: React.FC<Props> = (props) => {
                         onClick={() => {
                             utils.doTweet(info, props.password);
                         }}
-                    >【ツイート】</span>
+                    >【ツイート】</div>
                 </div>
             </div>
             <div className="frame">
@@ -60,7 +74,7 @@ const Dq1Info: React.FC<Props> = (props) => {
                 <OutputLabel label="道具７" value={dq1pswd.items[info.items[6]].name} error={!!dq1pswd.items[info.items[6]].illegal} />
                 <OutputLabel label="道具８" value={dq1pswd.items[info.items[7]].name} error={!!dq1pswd.items[info.items[7]].illegal} />
                 <OutputLabel label="やくそう" value={info.herb === 0 ? "なし" : info.herb + "本"} error={6 < info.herb} />
-                <OutputLabel label="かぎ" value={info.key=== 0 ? "なし" : info.key + "本"} error={6 < info.key} />
+                <OutputLabel label="かぎ" value={info.key === 0 ? "なし" : info.key + "本"} error={6 < info.key} />
             </div>
             <div className="frame">
                 <h2>とうばつ</h2>

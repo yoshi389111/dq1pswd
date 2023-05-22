@@ -56,6 +56,7 @@ const slayerItems: ReadonlyArray<dq1pswd.LabelInfo> = [
 
 const Dq1Edit: React.FC<Props> = (props) => {
     const [show, setShow] = useState<boolean>(false);
+    const [showCopied, setShowCopied] = useState<boolean>(false);
 
     const [name, setName] = useState<string>('');
     const [gold, setGold] = useState<number>(0);
@@ -104,11 +105,11 @@ const Dq1Edit: React.FC<Props> = (props) => {
             setItem8(info.items[7]);
             setGold(info.gold);
             setExp(info.exp);
-            setScale(info.dragonScale? 1 : 0);
-            setRing(info.fighterRing? 1 : 0);
-            setAmulet(info.deadAmulet? 1 : 0);
-            setDragon(info.dragonSlayered? 1 : 0);
-            setGolem(info.golemSlayered? 1 : 0);
+            setScale(info.dragonScale ? 1 : 0);
+            setRing(info.fighterRing ? 1 : 0);
+            setAmulet(info.deadAmulet ? 1 : 0);
+            setDragon(info.dragonSlayered ? 1 : 0);
+            setGolem(info.golemSlayered ? 1 : 0);
             setCrypt(info.cryptKey);
             setCrc(info.checkCode);
         }
@@ -161,15 +162,15 @@ const Dq1Edit: React.FC<Props> = (props) => {
                 ＊「そなたに　ふっかつのじゅもんを<br />
                 　　おしえよう！　　　　　　　　　<br />
                 <br />
-                { passwordInDialogue}
+                {passwordInDialogue}
                 <br />
-                ＊「これを　かきとめておくのだぞ。 <br />       
+                ＊「これを　かきとめておくのだぞ。 <br />
             </div>
         ) : (
             <div>
                 <span className="error">じゅもんが　ちがいます</span><br />
                 <br />
-                { passwordInDialogue}
+                {passwordInDialogue}
             </div>
         );
 
@@ -180,17 +181,30 @@ const Dq1Edit: React.FC<Props> = (props) => {
                     {dialogue}
                     <br />
                     <div className="button-area">
-                        <span
+                        <div
                             className="button"
                             onClick={() => setShow(false)}
-                        >【閉じる】</span>
-                        <span
-                            className="button"
+                        >【閉じる】</div>
+                        <div
+                            className={[
+                                "button",
+                                "dialog-target",
+                            ].join(' ')}
                             onClick={() => {
                                 utils.clipboardCopy(dq1.editPassword(password));
+                                setShowCopied(true);
+                                setTimeout(() => {
+                                    setShowCopied(false);
+                                }, 700);
                             }}
-                        >【コピー】</span>
-                        <span
+                        >【コピー】
+                            {showCopied && (
+                                <div className="dialog-copied">
+                                    Copied!
+                                </div>
+                            )}
+                        </div>
+                        <div
                             className={[
                                 "button",
                                 info.valid ? "" : "disable",
@@ -198,7 +212,7 @@ const Dq1Edit: React.FC<Props> = (props) => {
                             onClick={() => {
                                 utils.doTweet(info, password);
                             }}
-                        >【ツイート】</span>
+                        >【ツイート】</div>
                     </div>
                 </div>
             </div>
@@ -246,7 +260,7 @@ const Dq1Edit: React.FC<Props> = (props) => {
             </div>
             <div className="frame">
                 <h2>とうばつ</h2>
-                <SelectItem label="ドラゴン" value={dragon} setValue={setDragon} items={slayerItems}/>
+                <SelectItem label="ドラゴン" value={dragon} setValue={setDragon} items={slayerItems} />
                 <SelectItem label="ゴーレム" value={golem} setValue={setGolem} items={slayerItems} />
             </div>
             <div className="frame">
@@ -254,7 +268,7 @@ const Dq1Edit: React.FC<Props> = (props) => {
                 <SelectItem label="パターン" value={crypt} setValue={setCrypt} items={cryptItems} />
                 <OutputLabel
                     label="チェックコード"
-                    value={ utils.toHex2(crc) }
+                    value={utils.toHex2(crc)}
                     error={crc !== 0}
                 />
             </div>
@@ -270,7 +284,7 @@ const Dq1Edit: React.FC<Props> = (props) => {
                     }}>呪文を確認</span>
                 </div>
             </div>
-            { show && modalDialog() }
+            {show && modalDialog()}
         </div>
     );
 }

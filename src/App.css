@@ -212,3 +212,17 @@ input[type="number"] {
   display: flex;
   justify-content: space-between;
 }
+
+.dialog-target {
+  position: relative;
+}
+
+.dialog-copied {
+  position: absolute;
+  top: -20px;
+  right: -20px;
+  background-color: black;
+  border: 3px solid white;
+  border-radius: 0.5em;
+  padding: 10px;
+}
