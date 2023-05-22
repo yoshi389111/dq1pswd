@@ -1,5 +1,7 @@
 import React from 'react';
 import OutputLabel from './parts/OutputLabel';
+import ButtonWithDialog from './parts/ButtonWithDialog';
+import TweetButton from './parts/TweetButton'
 import * as dq1pswd from './dq1pswd/dq1pswd';
 import * as utils from './dq1utils';
 
@@ -10,7 +12,6 @@ interface Props {
 const Dq1Info: React.FC<Props> = (props) => {
     const dq1 = new dq1pswd.Dq1Password();
     const info = dq1.analyzePassword(props.password);
-    const [showCopied, setShowCopied] = React.useState<boolean>(false);
     if (!info) {
         return null;
     }
@@ -24,34 +25,13 @@ const Dq1Info: React.FC<Props> = (props) => {
                 <OutputLabel label="ＥＸ" value={info.exp.toString()} />
                 <OutputLabel label="Ｇ" value={info.gold.toString()} />
                 <div className="button-area">
-                    <div
-                        className={[
-                            "button",
-                            "dialog-target",
-                        ].join(' ')}
-                        onClick={() => {
-                            utils.clipboardCopy(dq1.editPassword(props.password));
-                            setShowCopied(true);
-                            setTimeout(() => {
-                                setShowCopied(false);
-                            }, 700);
-                        }}
-                    >【コピー】
-                        {showCopied && (
-                            <div className="dialog-copied">
-                                Copied!
-                            </div>
-                        )}
-                    </div>
-                    <div
-                        className={[
-                            "button",
-                            info.valid ? "" : "disable",
-                        ].join(' ')}
-                        onClick={() => {
-                            utils.doTweet(info, props.password);
-                        }}
-                    >【ツイート】</div>
+                    <ButtonWithDialog
+                        buttonLabel='【コピー】'
+                        dialogLabel='Copied!'
+                        timeout={700}
+                        onClick={() => utils.clipboardCopy(dq1.editPassword(props.password))}
+                    />
+                    <TweetButton info={info} />
                 </div>
             </div>
             <div className="frame">

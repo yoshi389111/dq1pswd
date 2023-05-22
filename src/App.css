@@ -217,12 +217,17 @@ input[type="number"] {
   position: relative;
 }
 
-.dialog-copied {
+.dialog-on-button {
   position: absolute;
   top: -20px;
   right: -20px;
-  background-color: black;
+  background-color: #00000f;
   border: 3px solid white;
   border-radius: 0.5em;
   padding: 10px;
+}
+
+.button-with-svg {
+  display: flex;
+  align-items: center;
 }

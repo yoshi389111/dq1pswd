@@ -3,6 +3,8 @@ import InputString from './parts/InputString';
 import InputNumber from './parts/InputNumber';
 import SelectItem from './parts/SelectItem';
 import OutputLabel from './parts/OutputLabel';
+import ButtonWithDialog from './parts/ButtonWithDialog';
+import TweetButton from './parts/TweetButton'
 import * as dq1pswd from './dq1pswd/dq1pswd';
 import * as utils from './dq1utils';
 
@@ -56,7 +58,6 @@ const slayerItems: ReadonlyArray<dq1pswd.LabelInfo> = [
 
 const Dq1Edit: React.FC<Props> = (props) => {
     const [show, setShow] = useState<boolean>(false);
-    const [showCopied, setShowCopied] = useState<boolean>(false);
 
     const [name, setName] = useState<string>('');
     const [gold, setGold] = useState<number>(0);
@@ -160,7 +161,7 @@ const Dq1Edit: React.FC<Props> = (props) => {
         const dialogue = info.valid ? (
             <div>
                 ＊「そなたに　ふっかつのじゅもんを<br />
-                　　おしえよう！　　　　　　　　　<br />
+                おしえよう！　　　　　　　　　<br />
                 <br />
                 {passwordInDialogue}
                 <br />
@@ -185,34 +186,13 @@ const Dq1Edit: React.FC<Props> = (props) => {
                             className="button"
                             onClick={() => setShow(false)}
                         >【閉じる】</div>
-                        <div
-                            className={[
-                                "button",
-                                "dialog-target",
-                            ].join(' ')}
-                            onClick={() => {
-                                utils.clipboardCopy(dq1.editPassword(password));
-                                setShowCopied(true);
-                                setTimeout(() => {
-                                    setShowCopied(false);
-                                }, 700);
-                            }}
-                        >【コピー】
-                            {showCopied && (
-                                <div className="dialog-copied">
-                                    Copied!
-                                </div>
-                            )}
-                        </div>
-                        <div
-                            className={[
-                                "button",
-                                info.valid ? "" : "disable",
-                            ].join(' ')}
-                            onClick={() => {
-                                utils.doTweet(info, password);
-                            }}
-                        >【ツイート】</div>
+                        <ButtonWithDialog
+                            buttonLabel='【コピー】'
+                            dialogLabel='Copied!'
+                            timeout={700}
+                            onClick={() => utils.clipboardCopy(dq1.editPassword(password))}
+                        />
+                        <TweetButton info={info} />
                     </div>
                 </div>
             </div>

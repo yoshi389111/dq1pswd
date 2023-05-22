@@ -7,7 +7,9 @@ export const clipboardCopy = async (text: string): Promise<void> => {
 }
 
 /** 復活の呪文をツイートする */
-export const doTweet = (info: dq1pswd.Dq1PasswordInfo, password: string): void => {
+export const doTweet = (info: dq1pswd.Dq1PasswordInfo): void => {
+    const dq1 = new dq1pswd.Dq1Password();
+    const password = dq1.createPassword(info)
     if (info.valid) {
         const message = "勇者「" + info.name + "」Ｌｖ" + info.level + "\n" +
             password.substring(0, 5) + "　" + password.substring(5, 12) + "\n" +
