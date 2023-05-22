@@ -19,9 +19,9 @@ const Dq1Info: React.FC<Props> = (props) => {
             <div className="frame">
                 <h2>ステータス</h2>
                 <OutputLabel label="なまえ" value={info.name} />
-                <OutputLabel label="Ｌｖ" value={info.level.toString()} />
-                <OutputLabel label="Ｅｘ" value={info.exp.toString()} />
-                <OutputLabel label="ゴールド" value={info.gold.toString()} />
+                <OutputLabel label="ＬＶ" value={info.level.toString()} />
+                <OutputLabel label="ＥＸ" value={info.exp.toString()} />
+                <OutputLabel label="Ｇ" value={info.gold.toString()} />
                 <div className="button-area">
                     <span
                         className="button"

@@ -215,8 +215,12 @@ const Dq1Edit: React.FC<Props> = (props) => {
                     setValue={setName}
                     placeholder="なまえをいれてください"
                 />
-                <InputNumber label="Ｅｘ" value={exp} setValue={setExp} />
-                <InputNumber label="ゴールド" value={gold} setValue={setGold} />
+                <div title="0～65,535 の範囲で入力してください">
+                    <InputNumber label="ＥＸ" value={exp} setValue={setExp} />
+                </div>
+                <div title="0～65,535 の範囲で入力してください">
+                    <InputNumber label="Ｇ" value={gold} setValue={setGold} />
+                </div>
             </div>
             <div className="frame">
                 <h2>そうび</h2>
