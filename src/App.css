@@ -80,7 +80,7 @@ input[type="number"] {
   border: 3px solid white;
   border-radius: 1em;
   padding-bottom: 1em;
-  margin: 1em 0 0.5em 0;
+  margin: 1em 0.5em 0.5em 0.5em;
 }
 
 .row-line {
@@ -127,7 +127,7 @@ input[type="number"] {
   outline: none;
   font-size: 1.5em;
   resize: none;
-  width: auto;
+  width: 95%;
 }
 
 .password-area:hover {
