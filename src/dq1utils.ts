@@ -1,29 +1,18 @@
 import * as dq1pswd from './dq1pswd/dq1pswd';
 
 /** 任意の文字列をクリップボードにコピー */
-export const clipboardCopy = (text: string) => {
-    // create textarea
-    const copyFrom = document.createElement("textarea");
-    // append to body
-    const bodyElm = document.getElementsByTagName("body")[0];
-    bodyElm.appendChild(copyFrom);
-    // copy 
-    copyFrom.textContent = text;
-    copyFrom.select();
-    const result = document.execCommand('copy');
-    // remove textarea
-    bodyElm.removeChild(copyFrom);
+export const clipboardCopy = async (text: string): Promise<void> => {
+    await navigator.clipboard.writeText(text);
     alert('コピーしました');
-    return result;
 }
 
 /** 復活の呪文をツイートする */
-export const doTweet = (info: dq1pswd.Dq1PasswordInfo, password: string) => {
+export const doTweet = (info: dq1pswd.Dq1PasswordInfo, password: string): void => {
     if (info.valid) {
         const message = "勇者「" + info.name + "」Ｌｖ" + info.level + "\n" +
             password.substring(0, 5) + "　" + password.substring(5, 12) + "\n" +
             password.substring(12, 17) + "　" + password.substring(17, 20) + "\n" +
-            "#復活の呪文\n";
+            "#復活の呪文 #dq1pswd\n";
         const url = "https://twitter.com/share?text=" + encodeURIComponent(message);
         window.open(url, "_blank");
     }
