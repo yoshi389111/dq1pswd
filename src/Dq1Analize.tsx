@@ -19,7 +19,7 @@ const Dq1Edit: React.FC<Props> = (props) => {
     // 詳細表示している呪文
     const [targetPassword, setTargetPassword] = useState<string>('');
     // 「？」に文字を割り当てた呪文リスト
-    const [passwords, setPasswords] = useState<Array<string>>([]);
+    const [passwords, setPasswords] = useState<string[]>([]);
 
     const [validLength, setValidLength] = useState<boolean>(true);
     const [validItem1, setValidItem1] = useState<boolean>(true);

@@ -188,7 +188,7 @@ export interface Dq1PasswordInfo {
     /** 盾(0-3) */
     shild: number;
     /** アイテム[8](0-14) */
-    items: Array<number>
+    items: number[]
     /** 魔法の鍵(0-6) */
     key: number;
     /** 薬草(0-6) */
@@ -239,7 +239,7 @@ export class Dq1Password {
      * @param nameNums 数字配列の名前
      * @return 名前
      */
-    toStringName(nameNums: Array<number>): string {
+    toStringName(nameNums: number[]): string {
         return nameNums
             .filter(num => 0 <= num && num < NAME_ALPHABET.length)
             .map(num => NAME_ALPHABET.charAt(num))
@@ -251,7 +251,7 @@ export class Dq1Password {
      * @param name 名前
      * @return 数値配列
      */
-    toNumberName(name: string): Array<number> {
+    toNumberName(name: string): number[] {
         const nameNums = name.split('')
             .map(ch => HANKAKU_TO_ZENKAKU[ch] || ch)
             .map(ch => NAME_ALIAS[ch] || ch)
@@ -273,7 +273,7 @@ export class Dq1Password {
      * @param passwordNums 復活の呪文(数値配列)
      * @return 復活の呪文
      */
-    toStringPassword(passwordNums: Array<number>): string {
+    toStringPassword(passwordNums: number[]): string {
         return passwordNums
             .filter(num => 0 <= num && num < JUMON_ALPHABET.length)
             .map(num => JUMON_ALPHABET.charAt(num))
@@ -285,7 +285,7 @@ export class Dq1Password {
      * @param password 復活の呪文
      * @return 数値配列
      */
-    toNumberPassword(password: string): Array<number> {
+    toNumberPassword(password: string): number[] {
         return password.split('')
             .map(ch => JUMON_ALPHABET.indexOf(ch))
             .filter(num => num !== -1);
@@ -318,7 +318,7 @@ export class Dq1Password {
     }
 
     /** CRC を計算する */
-    private calcuteCrc(bytes: Array<number>): number {
+    private calcuteCrc(bytes: number[]): number {
         // 最初の１バイトを除いた分の CRC を計算する
         let crc = 0;
         for (let i = 1; i < CODE_LENGTH; i++) {

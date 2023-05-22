@@ -11,29 +11,29 @@ interface Props {
     max?: number;
 }
 
-const InputNumber: React.FC<Props> = (prop) => {
+const InputNumber: React.FC<Props> = (props) => {
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const num = Number(event.target.value);
         if (isNaN(num)) {
-            prop.setValue(0);
-        } else if (num < prop.min!) {
-            prop.setValue(prop.min!);
-        } else if (prop.max! < num) {
-            prop.setValue(prop.max!);
+            props.setValue(0);
+        } else if (num < props.min!) {
+            props.setValue(props.min!);
+        } else if (props.max! < num) {
+            props.setValue(props.max!);
         } else {
-            prop.setValue(num);
+            props.setValue(num);
         }
     }
 
     return (
         <div className="row-line">
-            <span className="label">{prop.label}</span>
+            <span className="label">{props.label}</span>
             <input
                 className="value"
                 type="number"
-                value={prop.value}
-                min={prop.min}
-                max={prop.max}
+                value={props.value}
+                min={props.min}
+                max={props.max}
                 onChange={handleChange}
                 onFocus={(e) => e.target.select()}
             />
