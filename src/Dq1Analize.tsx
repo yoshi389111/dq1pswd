@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import * as dq1pswd from './dq1pswd/dq1pswd';
+import * as dq1 from './dq1pswd/dq1pswd';
 import Dq1Info from './Dq1Info'
 
 interface Props {
@@ -7,8 +7,6 @@ interface Props {
     setPassword: (password: string) => void;
     moveEdit: () => void;
 }
-
-const dq1 = new dq1pswd.Dq1Password();
 
 /** 不正な道具 */
 const INVALID_ITEM = 15;
@@ -56,7 +54,7 @@ const Dq1Edit: React.FC<Props> = (props) => {
 
         // 呪文を正規化
         const normalize = dq1.toNormalizePassword(password);
-        if (normalize.length !== 20) {
+        if (normalize.length !== dq1.JUMON_LENGTH) {
             // 復活の呪文の長さが違う
             setValidLength(false);
             return false;
@@ -171,12 +169,7 @@ const Dq1Edit: React.FC<Props> = (props) => {
         }
 
         const normalized = dq1.toNormalizePassword(password);
-        const editPassword = (
-            normalized.substring(0, 5) + "　" +
-            normalized.substring(5, 12) + "\n" +
-            normalized.substring(12, 17) + "　" +
-            normalized.substring(17, 20)
-        );
+        const editPassword = dq1.editPassword2(normalized);
         setNowPassword(editPassword);
 
         if (normalized.includes('？')) {
@@ -208,7 +201,7 @@ const Dq1Edit: React.FC<Props> = (props) => {
         validItem5 && validItem6 && validItem7 && validItem8 &&
         validKey && validHerb)) {
         const normalized = dq1.toNormalizePassword(nowPassword);
-        if (20 <= normalized.length) {
+        if (dq1.JUMON_LENGTH <= normalized.length) {
             errorPassword = (
                 <div>
                     <br />
@@ -216,7 +209,7 @@ const Dq1Edit: React.FC<Props> = (props) => {
                         <span>「{normalized.substring(0, 3)}</span>
                         <span
                             className={(validItem4 && validItem3) ? "" : "error"}
-                        >{normalized.substring(3, 5)}　</span>
+                        >{normalized.substring(3, 5)}&emsp;</span>
                         <span
                             className={validItem4 ? "" : "error"}
                         >{normalized.substring(5, 6)}</span>
@@ -227,12 +220,12 @@ const Dq1Edit: React.FC<Props> = (props) => {
                         <span
                             className={validItem8 ? "" : "error"}
                         >{normalized.substring(9, 10)}</span>
-                        <span>{normalized.substring(10, 12)}　</span>
+                        <span>{normalized.substring(10, 12)}&emsp;</span>
                     </div>
                     <div>
                         <span
                             className={validHerb ? "" : "error"}
-                        >　{normalized.substring(12, 13)}</span>
+                        >&emsp;{normalized.substring(12, 13)}</span>
                         <span
                             className={(validHerb && validItem5 && validKey) ? "" : "error"}
                         >{normalized.substring(13, 14)}</span>
@@ -242,14 +235,14 @@ const Dq1Edit: React.FC<Props> = (props) => {
                         <span
                             className={(validItem6 && validItem5) ? "" : "error"}
                         >{normalized.substring(15, 16)}</span>
-                        <span>{normalized.substring(16, 17)}　</span>
+                        <span>{normalized.substring(16, 17)}&emsp;</span>
                         <span
                             className={validItem1 ? "" : "error"}
                         >{normalized.substring(17, 18)}</span>
                         <span
                             className={(validItem1 && validItem2) ? "" : "error"}
                         >{normalized.substring(18, 20)}</span>
-                        <span>　　　　」</span>
+                        <span>&emsp;&emsp;&emsp;&emsp;」</span>
                     </div>
                 </div>
             );
@@ -259,20 +252,20 @@ const Dq1Edit: React.FC<Props> = (props) => {
     const errorMessage = (
         <div>
             <br />
-            {!validLength && <div>ひらがな20文字で指定してね</div> }
-            {!validHatena && <div>「？」は３つまでにしてね</div> }
-            {!validItem4 && <div>4～6文字目のどこかを変更してね</div> }
-            {!validItem3 && <div>4～5文字目のどこかを変更してね</div> }
-            {!validItem8 && <div>8～10文字目のどこかを変更してね</div> }
-            {!validItem7 && <div>8～9文字目のどこかを変更してね</div> }
-            {!validHerb && <div>13～14文字目のどこかを変更してね</div> }
-            {!validItem5 && <div>14～16文字目のどこかを変更してね</div> }
-            {!validKey && <div>14～15文字目のどこかを変更してね</div> }
-            {!validItem6 && <div>15～16文字目のどこかを変更してね</div> }
-            {!validItem1 && <div>18～20文字目のどこかを変更してね</div> }
-            {!validItem2 && <div>19～20文字目のどこかを変更してね</div> }
-            {emptyPasswords && <div>対象のふっかつのじゅもんがありません</div> }
-            {invalidChars && <div>次の文字はつかえません「{ invalidChars }」</div> }
+            {!validLength && <div>ひらがな20文字で指定してね</div>}
+            {!validHatena && <div>「？」は３つまでにしてね</div>}
+            {!validItem4 && <div>4～6文字目のどこかを変更してね</div>}
+            {!validItem3 && <div>4～5文字目のどこかを変更してね</div>}
+            {!validItem8 && <div>8～10文字目のどこかを変更してね</div>}
+            {!validItem7 && <div>8～9文字目のどこかを変更してね</div>}
+            {!validHerb && <div>13～14文字目のどこかを変更してね</div>}
+            {!validItem5 && <div>14～16文字目のどこかを変更してね</div>}
+            {!validKey && <div>14～15文字目のどこかを変更してね</div>}
+            {!validItem6 && <div>15～16文字目のどこかを変更してね</div>}
+            {!validItem1 && <div>18～20文字目のどこかを変更してね</div>}
+            {!validItem2 && <div>19～20文字目のどこかを変更してね</div>}
+            {emptyPasswords && <div>対象のふっかつのじゅもんがありません</div>}
+            {invalidChars && <div>次の文字はつかえません「{invalidChars}」</div>}
             {errorPassword}
         </div>
     );
@@ -282,13 +275,11 @@ const Dq1Edit: React.FC<Props> = (props) => {
             <br />
             {passwords.map((pswd, index) => (
                 <div
-                    className={[
-                        "password-selection",
-                    ].join(' ')}
+                    className="password-selection"
                     key={index}
                     onClick={() => {
                         props.setPassword(pswd.replace("　", ""));
-                        window.scrollTo(0,0);
+                        window.scrollTo(0, 0);
                     }}
                 >{dq1.editPassword(pswd)}</div>
             ))}

@@ -1,7 +1,6 @@
-import * as dq1pswd from './dq1pswd';
+import * as dq1 from './dq1pswd';
 
 it('dq1pswd.toLevel', () => {
-    const dq1 = new dq1pswd.Dq1Password();
     expect(dq1.toLevel(0)).toEqual(1);
     expect(dq1.toLevel(6)).toEqual(1);
     expect(dq1.toLevel(7)).toEqual(2);
@@ -64,7 +63,6 @@ it('dq1pswd.toLevel', () => {
 });
 
 test("dq1pswd.toStringName", () => {
-    const dq1 = new dq1pswd.Dq1Password();
     expect(dq1.toStringName([0, 1, 2, 3])).toEqual("０１２３");
     expect(dq1.toStringName([10, 11, 12, 13])).toEqual("あいうえ");
     expect(dq1.toStringName([63, 63, 63, 63])).toEqual("　　　　");
@@ -88,7 +86,6 @@ test("dq1pswd.toStringName", () => {
 });
 
 it("dq1pswd.toNumberName", () => {
-    const dq1 = new dq1pswd.Dq1Password();
     expect(dq1.toNumberName("０１２３")).toEqual([0, 1, 2, 3]);
     expect(dq1.toNumberName("４５６７")).toEqual([4, 5, 6, 7]);
     expect(dq1.toNumberName("８９あい")).toEqual([8, 9, 10, 11]);
@@ -125,7 +122,6 @@ it("dq1pswd.toNumberName", () => {
 });
 
 it("dq1pswd.toStringPassword", () => {
-    const dq1 = new dq1pswd.Dq1Password();
     expect(dq1.toStringPassword([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19])).toEqual("あいうえおかきくけこさしすせそたちつてと");
     expect(dq1.toStringPassword([20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39])).toEqual("なにぬねのはひふへほまみむめもやゆよらり");
     expect(dq1.toStringPassword([40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59])).toEqual("るれろわがぎぐげござじずぜぞだぢづでどば");
@@ -133,7 +129,6 @@ it("dq1pswd.toStringPassword", () => {
 });
 
 it("dq1pswd.toNumberPassword", () => {
-    const dq1 = new dq1pswd.Dq1Password();
     expect(dq1.toNumberPassword("あいうえお　かきくけこさし　すせそたち　つてと")).toEqual([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]);
     expect(dq1.toNumberPassword("なにぬねのはひふへほまみむめもやゆよらり")).toEqual([20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39]);
     expect(dq1.toNumberPassword("るれろわが ぎぐげご ざじずぜ ぞだぢづでどば")).toEqual([40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59]);
@@ -141,7 +136,6 @@ it("dq1pswd.toNumberPassword", () => {
 });
 
 it("dq1pswd.toNormalizePassword", () => {
-    const dq1 = new dq1pswd.Dq1Password();
     expect(dq1.toNormalizePassword("あいうえお")).toEqual("あいうえお");
     expect(dq1.toNormalizePassword("ぁぃぅぇぉ")).toEqual("あいうえお");
     expect(dq1.toNormalizePassword("あ　い うaえbお")).toEqual("あいうえお");
@@ -149,8 +143,7 @@ it("dq1pswd.toNormalizePassword", () => {
 });
 
 it("dq1pswd.createPassword", () => {
-    const dq1 = new dq1pswd.Dq1Password();
-    var info: dq1pswd.Dq1PasswordInfo = {
+    let info: dq1.Dq1PasswordInfo = {
         name: "あいうえ",
         gold: 51,
         exp: 60,
@@ -174,8 +167,7 @@ it("dq1pswd.createPassword", () => {
 });
 
 it("dq1pswd.analyzePassword", () => {
-    const dq1 = new dq1pswd.Dq1Password();
-    var info = dq1.analyzePassword("ふるいけや かわずとびこむ みずのおと ばしや");
+    let info = dq1.analyzePassword("ふるいけや かわずとびこむ みずのおと ばしや");
     expect(info).not.toBeNull();
     expect(info!.name).toEqual("４ひえた");
     expect(info!.gold).toEqual(15143);
@@ -197,7 +189,6 @@ it("dq1pswd.analyzePassword", () => {
 });
 
 it("dq1pswd.hatenaPassword", () => {
-    const dq1 = new dq1pswd.Dq1Password();
     expect(dq1.hatenaPassword("ふるいけや  かわずとびこむ  みずのおと  あ？？")).toEqual([
         "ふるいけやかわずとびこむみずのおとあえほ",
         "ふるいけやかわずとびこむみずのおとあおぞ",
@@ -217,7 +208,6 @@ it("dq1pswd.hatenaPassword", () => {
 });
 
 it("dq1pswd.countHatena", () => {
-    const dq1 = new dq1pswd.Dq1Password();
     expect(dq1.countHatena("ふるいけやかわずとびこむみずのおとばしや")).toEqual(0);
     expect(dq1.countHatena("ふるいけやかわずとびこむみずのおとばし？")).toEqual(1);
     expect(dq1.countHatena("ふるいけやかわずとびこむみずのおとば？？")).toEqual(2);
@@ -225,7 +215,6 @@ it("dq1pswd.countHatena", () => {
 });
 
 it("dq1pswd.editPassword", () => {
-    const dq1 = new dq1pswd.Dq1Password();
     expect(dq1
         .editPassword("ふるいけやかわずとびこむみずのおとばしや"))
         .toEqual("ふるいけや　かわずとびこむ　みずのおと　ばしや");

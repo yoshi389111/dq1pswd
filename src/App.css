@@ -213,6 +213,13 @@ input[type="number"] {
   justify-content: space-between;
 }
 
+.passwd-block {
+  margin-left: auto;
+  margin-right: auto;
+  width: max-content; 
+  text-align: left;
+}
+
 .dialog-target {
   position: relative;
 }

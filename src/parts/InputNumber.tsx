@@ -7,8 +7,12 @@ interface Props {
     value: number;
     /** 値を変更 */
     setValue: (val: number) => void;
+    /** 最小値 */
     min?: number;
+    /** 最大値 */
     max?: number;
+    /** ツールチップ */
+    title?: string;
 }
 
 const InputNumber: React.FC<Props> = (props) => {
@@ -26,7 +30,7 @@ const InputNumber: React.FC<Props> = (props) => {
     }
 
     return (
-        <div className="row-line">
+        <div className="row-line" title={props.title}>
             <span className="label">{props.label}</span>
             <input
                 className="value"

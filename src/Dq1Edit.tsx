@@ -5,7 +5,7 @@ import SelectItem from './parts/SelectItem';
 import OutputLabel from './parts/OutputLabel';
 import ButtonWithDialog from './parts/ButtonWithDialog';
 import TweetButton from './parts/TweetButton'
-import * as dq1pswd from './dq1pswd/dq1pswd';
+import * as dq1 from './dq1pswd/dq1pswd';
 import * as utils from './dq1utils';
 
 interface Props {
@@ -14,9 +14,7 @@ interface Props {
     moveAnalize: () => void;
 }
 
-const dq1 = new dq1pswd.Dq1Password();
-
-const herbAndKeyItems: ReadonlyArray<dq1pswd.LabelInfo> = [
+const herbAndKeyItems: ReadonlyArray<dq1.LabelInfo> = [
     { id: 0, name: "なし" },
     { id: 1, name: "1本" },
     { id: 2, name: "2本" },
@@ -35,7 +33,7 @@ const herbAndKeyItems: ReadonlyArray<dq1pswd.LabelInfo> = [
     { id: 15, name: "（15本）", illegal: true },
 ];
 
-const cryptItems: ReadonlyArray<dq1pswd.LabelInfo> = [
+const cryptItems: ReadonlyArray<dq1.LabelInfo> = [
     { id: 0, name: "#0" },
     { id: 1, name: "#1" },
     { id: 2, name: "#2" },
@@ -46,18 +44,18 @@ const cryptItems: ReadonlyArray<dq1pswd.LabelInfo> = [
     { id: 7, name: "#7" },
 ];
 
-const equipItems: ReadonlyArray<dq1pswd.LabelInfo> = [
+const equipItems: ReadonlyArray<dq1.LabelInfo> = [
     { id: 0, name: "装備してない" },
     { id: 1, name: "装備した" },
 ];
 
-const slayerItems: ReadonlyArray<dq1pswd.LabelInfo> = [
+const slayerItems: ReadonlyArray<dq1.LabelInfo> = [
     { id: 0, name: "倒してない" },
     { id: 1, name: "倒した" },
 ];
 
 const Dq1Edit: React.FC<Props> = (props) => {
-    const [show, setShow] = useState<boolean>(false);
+    const [showDialog, setShowDialog] = useState<boolean>(false);
 
     const [name, setName] = useState<string>('');
     const [gold, setGold] = useState<number>(0);
@@ -118,7 +116,7 @@ const Dq1Edit: React.FC<Props> = (props) => {
 
     /** 入力内容から復活の呪文を作成 */
     const createPassword = () => {
-        const info: dq1pswd.Dq1PasswordInfo = {
+        const info: dq1.Dq1PasswordInfo = {
             name: name,
             wapon: wapon,
             armor: armor,
@@ -149,42 +147,44 @@ const Dq1Edit: React.FC<Props> = (props) => {
             return null;
         }
 
-        // 表示用編集(全角スペースで幅調整している。注意)
-        const passwordInDialogue = (
-            <span>
-                {password.substring(0, 5)}　{password.substring(5, 12)}<br />
-                {password.substring(12, 17)}　{password.substring(17, 20)}　　　　<br />
-            </span>
-        );
-
-        // 王様のセリフ
-        const dialogue = info.valid ? (
-            <div>
-                ＊「そなたに　ふっかつのじゅもんを<br />
-                おしえよう！　　　　　　　　　<br />
-                <br />
-                {passwordInDialogue}
-                <br />
-                ＊「これを　かきとめておくのだぞ。 <br />
-            </div>
-        ) : (
-            <div>
-                <span className="error">じゅもんが　ちがいます</span><br />
-                <br />
-                {passwordInDialogue}
-            </div>
-        );
-
         return (
-            <div id="overlay" onClick={() => setShow(false)}>
+            <div id="overlay" onClick={() => setShowDialog(false)}>
                 <div className="frame" onClick={(e) => e.stopPropagation()}>
-                    <h2>勇者「{info.name}」Ｌｖ {info.level}</h2>
-                    {dialogue}
+                    <h2>勇者「{info.name}」ＬＶ {info.level}</h2>
+                    {info.valid ? (
+                        <div className="passwd-block">
+                            {/* formatter が行頭の全角空白を削除することがある。注意 */}
+                            ＊「そなたに　ふっかつのじゅもんを<br />
+                            &emsp;&emsp;おしえよう！<br />
+                            <br />
+                            {
+                                dq1.editPassword2(password).split('\n').map((it, i) => (
+                                    <React.Fragment key={`pswd-${i}`}>
+                                        &emsp;&emsp;{it}<br />
+                                    </React.Fragment>
+                                ))
+                            }
+                            <br />
+                            ＊「これを　かきとめておくのだぞ。 <br />
+                        </div>
+                    ) : (
+                        <div className="passwd-block">
+                            <span className="error">じゅもんが　ちがいます</span><br />
+                            <br />
+                            {
+                                dq1.editPassword2(password).split('\n').map((it, i) => (
+                                    <React.Fragment key={`pswd-${i}`}>
+                                        {it}<br />
+                                    </React.Fragment>
+                                ))
+                            }
+                        </div>
+                    )}
                     <br />
                     <div className="button-area">
                         <div
                             className="button"
-                            onClick={() => setShow(false)}
+                            onClick={() => setShowDialog(false)}
                         >【閉じる】</div>
                         <ButtonWithDialog
                             buttonLabel='【コピー】'
@@ -209,32 +209,28 @@ const Dq1Edit: React.FC<Props> = (props) => {
                     setValue={setName}
                     placeholder="なまえをいれてください"
                 />
-                <div title="0～65,535 の範囲で入力してください">
-                    <InputNumber label="ＥＸ" value={exp} setValue={setExp} />
-                </div>
-                <div title="0～65,535 の範囲で入力してください">
-                    <InputNumber label="Ｇ" value={gold} setValue={setGold} />
-                </div>
+                <InputNumber label="ＥＸ" value={exp} setValue={setExp} title="0～65,535 の範囲で入力してください" />
+                <InputNumber label="Ｇ" value={gold} setValue={setGold} title="0～65,535 の範囲で入力してください" />
             </div>
             <div className="frame">
                 <h2>そうび</h2>
-                <SelectItem label="ぶき" value={wapon} setValue={setWapon} items={dq1pswd.wapons} />
-                <SelectItem label="よろい" value={armor} setValue={setArmor} items={dq1pswd.armors} />
-                <SelectItem label="たて" value={shild} setValue={setShild} items={dq1pswd.shilds} />
+                <SelectItem label="ぶき" value={wapon} setValue={setWapon} items={dq1.wapons} />
+                <SelectItem label="よろい" value={armor} setValue={setArmor} items={dq1.armors} />
+                <SelectItem label="たて" value={shild} setValue={setShild} items={dq1.shilds} />
                 <SelectItem label="りゅうのうろこ" value={scale} setValue={setScale} items={equipItems} />
                 <SelectItem label="せんしのゆびわ" value={ring} setValue={setRing} items={equipItems} />
                 <SelectItem label="しのくびかざり" value={amulet} setValue={setAmulet} items={equipItems} />
             </div>
             <div className="frame">
                 <h2>もちもの</h2>
-                <SelectItem label="道具１" value={item1} setValue={setItem1} items={dq1pswd.items} />
-                <SelectItem label="道具２" value={item2} setValue={setItem2} items={dq1pswd.items} />
-                <SelectItem label="道具３" value={item3} setValue={setItem3} items={dq1pswd.items} />
-                <SelectItem label="道具４" value={item4} setValue={setItem4} items={dq1pswd.items} />
-                <SelectItem label="道具５" value={item5} setValue={setItem5} items={dq1pswd.items} />
-                <SelectItem label="道具６" value={item6} setValue={setItem6} items={dq1pswd.items} />
-                <SelectItem label="道具７" value={item7} setValue={setItem7} items={dq1pswd.items} />
-                <SelectItem label="道具８" value={item8} setValue={setItem8} items={dq1pswd.items} />
+                <SelectItem label="道具１" value={item1} setValue={setItem1} items={dq1.items} />
+                <SelectItem label="道具２" value={item2} setValue={setItem2} items={dq1.items} />
+                <SelectItem label="道具３" value={item3} setValue={setItem3} items={dq1.items} />
+                <SelectItem label="道具４" value={item4} setValue={setItem4} items={dq1.items} />
+                <SelectItem label="道具５" value={item5} setValue={setItem5} items={dq1.items} />
+                <SelectItem label="道具６" value={item6} setValue={setItem6} items={dq1.items} />
+                <SelectItem label="道具７" value={item7} setValue={setItem7} items={dq1.items} />
+                <SelectItem label="道具８" value={item8} setValue={setItem8} items={dq1.items} />
                 <SelectItem label="やくそう" value={herb} setValue={setHerb} items={herbAndKeyItems} />
                 <SelectItem label="かぎ" value={key} setValue={setKey} items={herbAndKeyItems} />
             </div>
@@ -260,11 +256,11 @@ const Dq1Edit: React.FC<Props> = (props) => {
                     }}>呪文を入力</span>
                     <span className="button" onClick={() => {
                         props.setPassword(createPassword());
-                        setShow(true);
+                        setShowDialog(true);
                     }}>呪文を確認</span>
                 </div>
             </div>
-            {show && modalDialog()}
+            {showDialog && modalDialog()}
         </div>
     );
 }

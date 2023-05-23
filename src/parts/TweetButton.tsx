@@ -1,15 +1,14 @@
 import React from 'react';
-import * as dq1pswd from '../dq1pswd/dq1pswd';
+import * as dq1 from '../dq1pswd/dq1pswd';
 
 interface Props {
-    info: dq1pswd.Dq1PasswordInfo;
+    info: dq1.Dq1PasswordInfo;
 }
 
 const TweetButton: React.FC<Props> = (props) => {
 
     /** 復活の呪文をツイートする */
     const doTweet = (): void => {
-        const dq1 = new dq1pswd.Dq1Password();
         const password = dq1.createPassword(props.info);
         if (props.info.valid) {
             const param = encodeURIComponent(
