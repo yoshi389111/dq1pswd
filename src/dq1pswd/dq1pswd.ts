@@ -43,7 +43,7 @@ const HANKAKU_TO_ZENKAKU: Readonly<{ [key: string]: string }> = {
 };
 
 /** 名前読み換えデータ */
-const NAME_ALIAS: Readonly<{[key: string]: string}> = {
+const NAME_ALIAS: Readonly<{ [key: string]: string }> = {
     "ぁ": "あ", "ぃ": "い", "ぅ": "う", "ぇ": "え", "ぉ": "お",
     "が": "か゛", "ぎ": "き゛", "ぐ": "く゛", "げ": "け゛", "ご": "こ゛",
     "ざ": "さ゛", "じ": "し゛", "ず": "す゛", "ぜ": "せ゛", "ぞ": "そ゛",
@@ -98,7 +98,7 @@ const JUMON_ALPHABET: Readonly<string> =
     "ばびぶべぼ";
 
 /** 復活の呪文読み換えデータ */
-const JUMON_ALIAS: Readonly<{[key: string]: string}> = {
+const JUMON_ALIAS: Readonly<{ [key: string]: string }> = {
     "ぁ": "あ", "ぃ": "い", "ぅ": "う", "ぇ": "え", "ぉ": "お",
     "ゃ": "や", "ゅ": "ゆ", "ょ": "よ", "っ": "つ", "を": "お",
     "＊": "？", "?": "？", "*": "？"
@@ -524,7 +524,7 @@ export class Dq1Password {
     }
 
     /**
-     * パスワードを５＋７＋５＋３の形式で編集する.
+     * パスワードを「５＋７＋５＋３」の形式で編集する.
      *
      * @param pswd パスワード(20文字)
      * @return 編集後パスワード
@@ -536,4 +536,16 @@ export class Dq1Password {
             + pswd.substring(17, 20);
     }
 
+    /**
+     * パスワードを「５＋７」と「５＋３」の２行で編集する.
+     *
+     * @param pswd パスワード(20文字)
+     * @return 編集後パスワード
+     */
+    editPassword2(pswd: string): string {
+        return pswd.substring(0, 5) + "　"
+            + pswd.substring(5, 12) + "\n"
+            + pswd.substring(12, 17) + "　"
+            + pswd.substring(17, 20);
+    }
 }
