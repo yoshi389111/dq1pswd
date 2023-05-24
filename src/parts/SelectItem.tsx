@@ -19,12 +19,12 @@ const SelectItem: React.FC<Props> = (props) => {
   };
 
   const selected = props.items.find((item) => item.id === props.value);
-  const error = selected && selected.illegal ? 'error' : '';
+  const error = selected && selected.illegal;
 
   return (
     <div className='row-line'>
-      <span className={`label ${error}`}>{props.label}</span>
-      <select className={`label ${error}`} value={props.value} onChange={handleChange}>
+      <span className={['label', error ? 'error' : ''].join(' ')}>{props.label}</span>
+      <select className={['value', error ? 'error' : ''].join(' ')} value={props.value} onChange={handleChange}>
         {props.items.map((item) => (
           <option key={item.id} value={item.id}>
             {item.name}
