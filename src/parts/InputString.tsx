@@ -11,27 +11,23 @@ interface Props {
   setValue: (val: string) => void;
 }
 
-const InputString: React.FC<Props> = (props) => {
+const InputString: React.FC<Props> = ({ label, value, placeholder = "", setValue }) => {
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    props.setValue(event.target.value);
+    setValue(event.target.value);
   };
 
   return (
     <div className='row-line'>
-      <span className='label'>{props.label}</span>
+      <span className='label'>{label}</span>
       <input
         className='value'
         type='text'
-        value={props.value}
-        placeholder={props.placeholder}
+        value={value}
+        placeholder={placeholder}
         onChange={handleChange}
       />
     </div>
   );
-};
-
-InputString.defaultProps = {
-  placeholder: '',
 };
 
 export default InputString;

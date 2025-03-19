@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import 'App.css';
-import Dq1Edit from 'Dq1Edit';
-import Dq1Analize from 'Dq1Analize';
+import './App.css';
+import Dq1Edit from './Dq1Edit';
+import Dq1Analize from './Dq1Analize';
+import LogoSvg from './logo.svg';
 
 type ModeType = 'edit' | 'analize';
 
@@ -19,7 +20,10 @@ const App: React.FC = () => {
   return (
     <div className='App'>
       <div className='header'>
-        <h1>ふっかつのじゅもん</h1>
+        <h1>
+          <img src={LogoSvg} style={{ verticalAlign: 'middle' }} alt='' />
+          &nbsp; ふっかつのじゅもん
+        </h1>
       </div>
 
       {page === 'edit' && (

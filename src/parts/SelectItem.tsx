@@ -1,5 +1,5 @@
 import React from 'react';
-import * as dq1 from 'dq1pswd/dq1pswd';
+import * as dq1 from '../dq1pswd/dq1pswd';
 
 interface Props {
   /** ラベル名 */
