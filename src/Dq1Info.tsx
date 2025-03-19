@@ -1,9 +1,9 @@
 import React from 'react';
-import OutputLabel from 'parts/OutputLabel';
-import ButtonWithDialog from 'parts/ButtonWithDialog';
-import TweetButton from 'parts/TweetButton';
-import * as dq1 from 'dq1pswd/dq1pswd';
-import * as utils from 'utils/dq1utils';
+import OutputLabel from './parts/OutputLabel';
+import ButtonWithDialog from './parts/ButtonWithDialog';
+import TweetButton from './parts/TweetButton';
+import * as dq1 from './dq1pswd/dq1pswd';
+import * as utils from './utils/dq1utils';
 
 interface Props {
   password: string;

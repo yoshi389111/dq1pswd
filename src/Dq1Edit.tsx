@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import InputString from 'parts/InputString';
-import InputNumber from 'parts/InputNumber';
-import SelectItem from 'parts/SelectItem';
-import OutputLabel from 'parts/OutputLabel';
-import ButtonWithDialog from 'parts/ButtonWithDialog';
-import TweetButton from 'parts/TweetButton';
-import * as dq1 from 'dq1pswd/dq1pswd';
-import * as utils from 'utils/dq1utils';
+import InputString from './parts/InputString';
+import InputNumber from './parts/InputNumber';
+import SelectItem from './parts/SelectItem';
+import OutputLabel from './parts/OutputLabel';
+import ButtonWithDialog from './parts/ButtonWithDialog';
+import TweetButton from './parts/TweetButton';
+import * as dq1 from './dq1pswd/dq1pswd';
+import * as utils from './utils/dq1utils';
 
 interface Props {
   password: string;
@@ -88,7 +88,7 @@ const Dq1Edit: React.FC<Props> = (props) => {
     }
     const info = dq1.analyzePassword(props.password);
     if (info) {
-      setName(info.name.replace(/　+$/, ''));
+      setName(info.name.replace(/\u3000+$/, ''));
       setWapon(info.wapon);
       setArmor(info.armor);
       setShild(info.shild);
@@ -156,7 +156,7 @@ const Dq1Edit: React.FC<Props> = (props) => {
           {info.valid ? (
             <div className='passwd-block'>
               {/* formatter が行頭の全角空白を削除することがある。注意 */}
-              ＊「そなたに　ふっかつのじゅもんを
+              ＊「そなたに&#x3000;ふっかつのじゅもんを
               <br />
               &emsp;&emsp;おしえよう！
               <br />
@@ -171,11 +171,11 @@ const Dq1Edit: React.FC<Props> = (props) => {
                   </React.Fragment>
                 ))}
               <br />
-              ＊「これを　かきとめておくのだぞ。 <br />
+              ＊「これを&#x3000;かきとめておくのだぞ。 <br />
             </div>
           ) : (
             <div className='passwd-block'>
-              <span className='error'>じゅもんが　ちがいます</span>
+              <span className='error'>じゅもんが&#x3000;ちがいます</span>
               <br />
               <br />
               {dq1

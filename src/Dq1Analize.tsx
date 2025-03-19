@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import * as dq1 from 'dq1pswd/dq1pswd';
-import Dq1Info from 'Dq1Info';
+import React, { useState, useEffect, useCallback } from 'react';
+import * as dq1 from './dq1pswd/dq1pswd';
+import Dq1Info from './Dq1Info';
 
 interface Props {
   password: string;
@@ -130,8 +130,7 @@ const Dq1Edit: React.FC<Props> = (props) => {
     return count === 0 ? true : valid;
   };
 
-  // eslint-disable-next-line @typescript-eslint/require-await
-  const analyze = async (password: string): Promise<void> => {
+  const analyze = useCallback(async (password: string): Promise<void> => {
     if (!canAnalyze(password)) {
       setPasswords([]);
       setEmptyPasswords(false);
@@ -157,14 +156,14 @@ const Dq1Edit: React.FC<Props> = (props) => {
       setEmptyPasswords(false);
       setTargetPassword(normalized);
     }
-  };
+  }, []);
 
   // 初期表示
   useEffect(() => {
     if (props.password) {
       void analyze(props.password);
     }
-  }, [props.password]);
+  }, [props.password, analyze]);
 
   let errorPassword = null;
   if (
@@ -254,7 +253,7 @@ const Dq1Edit: React.FC<Props> = (props) => {
   return (
     <div>
       <div className='frame'>
-        <h2>ふっかつのじゅもんを　いれてください</h2>
+        <h2>ふっかつのじゅもんを&#x3000;いれてください</h2>
         <textarea
           className='password-area'
           cols={40}

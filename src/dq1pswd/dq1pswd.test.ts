@@ -1,3 +1,4 @@
+import { expect, it } from "vitest"
 import * as dq1 from './dq1pswd';
 
 it('dq1pswd.toLevel', () => {
@@ -62,7 +63,7 @@ it('dq1pswd.toLevel', () => {
   expect(dq1.toLevel(65535)).toEqual(30);
 });
 
-test('dq1pswd.toStringName', () => {
+it('dq1pswd.toStringName', () => {
   expect(dq1.toStringName([0, 1, 2, 3])).toEqual('０１２３');
   expect(dq1.toStringName([10, 11, 12, 13])).toEqual('あいうえ');
   expect(dq1.toStringName([63, 63, 63, 63])).toEqual('　　　　');
