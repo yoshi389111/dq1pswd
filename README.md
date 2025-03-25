@@ -1,8 +1,9 @@
 # ふっかつのじゅもん
 
-<a href="LICENSE"><img src="images/badge_license.svg"></a>
-&nbsp;<img src="images/badge_typescript.svg">
-&nbsp;<img src="images/badge_react.svg">
+[![LICENSE](images/badge_license.svg)](LICENSE)
+&nbsp;![TypeScript](images/badge_typescript.svg)
+&nbsp;![React](images/badge_react.svg)
+&nbsp;![Invalid Password](images/invalid_password.svg)
 
 ## 概要
 
@@ -98,13 +99,22 @@
 
 ## 自分の環境で動かす場合
 
-適当に clone して動かしてください。
+適当に clone (あるいは ZIP ファイルでダウンロードなど)して動かしてください。
 
-node.js が必要です。
+node.js / npm が必要です。
 
-package.json をみて start（開発中モードの Web が起動）か build（ビルドしたあと既存の web サービスに登録して使用する）を起動してください。
+package.json をみて `dev`（開発中モードの Web が起動）か `build` （ビルドしたあと既存の web サービスに登録して使用する）を起動してください。
 
-既存の web サーバに入れる場合には、パス名を package.json の homepage に登録（パスがなくてルートで動かすなら削除）してください。
+ダウンロード(git で SSH を使って clone)から開発中モードで起動するまでの手順例は以下の通りです。
+
+```shell-session
+git clone git@github.com:yoshi389111/dq1pswd.git
+cd dq1pswd
+npm install
+npm run dev
+```
+
+既存の web サーバに入れる場合には、パス名を package.json の `homepage` に登録（パスがなくてルートで動かすなら削除）してください。
 
 ## 改造したい場合
 
@@ -112,7 +122,7 @@ package.json をみて start（開発中モードの Web が起動）か build�
 
 以下を使用しています。
 
-- node.js
+- node.js / npm
 - typescript
 - react
 
@@ -128,3 +138,4 @@ MIT License
 - [復活の呪文解析日記](./dq1ana.md)
 - Qiita: [[ネタ]復活の呪文を解析してみたよ](https://qiita.com/yoshi389111/items/29ade2f62483e9c095d9)
 - [yoshi389111/dq2pswd](https://github.com/yoshi389111/dq2pswd) - ふっかつのじゅもんを作れます。２の方です。
+- [yoshi389111/dq-microbar](https://github.com/yoshi389111/dq-microbar) - DQ 風のステッカーが作れます。バナーというかバッジというか。
