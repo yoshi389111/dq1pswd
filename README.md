@@ -114,7 +114,7 @@ npm install
 npm run dev
 ```
 
-既存の web サーバに入れる場合には、パス名を package.json の `homepage` に登録（パスがなくてルートで動かすなら削除）してください。
+既存の web サーバに入れる場合には、パス名を `vite.config.ts` の `base` に登録（パスがなくてルートで動かすなら削除）してから `build` してください。
 
 ## 改造したい場合
 
