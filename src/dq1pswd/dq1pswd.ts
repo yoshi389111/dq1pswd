@@ -2,27 +2,26 @@
 
 /** 名前の長さ */
 const NAME_LENGTH = 4;
-/** 復活の呪文の長さ[文字数](1文字=6bit) */
+/** 復活の呪文の長さ[文字数](1文字=6bit, 20文字=120bit) */
 export const JUMON_LENGTH = 20;
-/** 復活の呪文のコードの長さ[バイト] */
+/** 復活の呪文のコードの長さ[バイト](15byte = 120bit) */
 const CODE_LENGTH = 15; // JUMON_LENGTH * 3 / 4
 /** 名前用五十音 */
-const NAME_ALPHABET: Readonly<string> =
+const NAME_ALPHABET: ReadonlyArray<string> = Array.from(
   '０１２３４５６７８９' +
-  'あいうえお' +
-  'かきくけこ' +
-  'さしすせそ' +
-  'たちつてと' +
-  'なにぬねの' +
-  'はひふへほ' +
-  'まみむめも' +
-  'やゆよ' +
-  'らりるれろ' +
-  'わをん' +
-  'っゃゅょ' +
-  '゛゜－　'; // 全角スペース
-/** 不正なアイテム番号 */
-const INVALID_ITEM = 15;
+    'あいうえお' +
+    'かきくけこ' +
+    'さしすせそ' +
+    'たちつてと' +
+    'なにぬねの' +
+    'はひふへほ' +
+    'まみむめも' +
+    'やゆよ' +
+    'らりるれろ' +
+    'わをん' +
+    'っゃゅょ' +
+    '゛゜－　' // 全角スペース
+);
 
 /** 半角カナを全角かなに変換する読み替えデータ */
 const HANKAKU_TO_ZENKAKU: Readonly<{ [key: string]: string }> = {
@@ -132,9 +131,9 @@ const NAME_ALIAS: Readonly<{ [key: string]: string }> = {
   ゐ: 'い',
   ゑ: 'え',
   '\u3094': 'う゛', // 「う」＋濁点
-  '\u308e': 'わ',
-  '\u3095': 'か',
-  '\u3096': 'け', // 小さい「わ」「か」「け」
+  '\u308e': 'わ', // 小さい「わ」
+  '\u3095': 'か', // 小さい「か」
+  '\u3096': 'け', // 小さい「け」
   ァ: 'あ',
   ィ: 'い',
   ゥ: 'う',
@@ -218,15 +217,15 @@ const NAME_ALIAS: Readonly<{ [key: string]: string }> = {
   ヰ: 'い',
   ヱ: 'え',
   ヴ: 'う゛',
-  '\u30ee': 'わ',
-  '\u30f5': 'か',
-  '\u30f6': 'け', // 小さい「ワ」「カ」「ケ」
-  '\u30f7': 'わ゛',
-  '\u30f8': 'い゛',
-  '\u30f9': 'え゛',
-  '\u30fa': 'を゛', // 「ワ」「ヰ」「ヱ」「ヲ」＋濁点
-  '\u3099': '\u309b',
-  '\u309a': '\u309c', // 結合文字用濁点/半濁点
+  '\u30ee': 'わ', // 小さい「ワ」
+  '\u30f5': 'か', // 小さい「カ」
+  '\u30f6': 'け', // 小さい「ケ」
+  '\u30f7': 'わ゛', // 「ワ」＋濁点
+  '\u30f8': 'い゛', // 「ヰ」＋濁点
+  '\u30f9': 'え゛', // 「ヱ」＋濁点
+  '\u30fa': 'を゛', // 「ヲ」＋濁点
+  '\u3099': '\u309b', // 結合文字用濁点
+  '\u309a': '\u309c', // 結合文字用半濁点
   // アイヌ語表音拡張（小さいカタカナ）
   '\u31f0': 'く',
   '\u31f1': 'し',
@@ -247,21 +246,22 @@ const NAME_ALIAS: Readonly<{ [key: string]: string }> = {
 };
 
 /** 復活の呪文用五十音 */
-const JUMON_ALPHABET: Readonly<string> =
+const JUMON_ALPHABET: ReadonlyArray<string> = Array.from(
   'あいうえお' +
-  'かきくけこ' +
-  'さしすせそ' +
-  'たちつてと' +
-  'なにぬねの' +
-  'はひふへほ' +
-  'まみむめも' +
-  'やゆよ' +
-  'らりるれろ' +
-  'わ' +
-  'がぎぐげご' +
-  'ざじずぜぞ' +
-  'だぢづでど' +
-  'ばびぶべぼ';
+    'かきくけこ' +
+    'さしすせそ' +
+    'たちつてと' +
+    'なにぬねの' +
+    'はひふへほ' +
+    'まみむめも' +
+    'やゆよ' +
+    'らりるれろ' +
+    'わ' +
+    'がぎぐげご' +
+    'ざじずぜぞ' +
+    'だぢづでど' +
+    'ばびぶべぼ'
+);
 
 /** 復活の呪文読み換えデータ */
 const JUMON_ALIAS: Readonly<{ [key: string]: string }> = {
@@ -302,7 +302,7 @@ export interface LabelInfo {
 }
 
 /** 武器の一覧 */
-export const wapons: ReadonlyArray<LabelInfo> = [
+export const weapons: ReadonlyArray<LabelInfo> = [
   { id: 0, name: 'なし' },
   { id: 1, name: 'たけざお' },
   { id: 2, name: 'こんぼう' },
@@ -326,7 +326,7 @@ export const armors: ReadonlyArray<LabelInfo> = [
 ];
 
 /** 盾の一覧 */
-export const shilds: ReadonlyArray<LabelInfo> = [
+export const shields: ReadonlyArray<LabelInfo> = [
   { id: 0, name: 'なし' },
   { id: 1, name: 'かわのたて' },
   { id: 2, name: 'てつのたて' },
@@ -397,7 +397,7 @@ export interface Dq1PasswordInfo {
 /**
  * レベルを求める.
  * @param exp 経験値
- * @return レベル
+ * @returns レベル
  */
 export const toLevel = (exp: number): number => {
   for (let i = LEVELS.length - 1; 0 <= i; i--) {
@@ -411,19 +411,19 @@ export const toLevel = (exp: number): number => {
 /**
  * 名前を文字列に変換.
  * @param nameNums 数字配列の名前
- * @return 名前
+ * @returns 名前
  */
 export const toStringName = (nameNums: number[]): string => {
   return nameNums
     .filter((num) => 0 <= num && num < NAME_ALPHABET.length)
-    .map((num) => NAME_ALPHABET.charAt(num))
+    .map((num) => NAME_ALPHABET[num])
     .join('');
 };
 
 /**
  * 名前を数値配列に変換.
  * @param name 名前
- * @return 数値配列
+ * @returns 数値配列
  */
 export const toNumberName = (name: string): number[] => {
   const nameNums = name
@@ -444,19 +444,19 @@ export const toNumberName = (name: string): number[] => {
 /**
  * 数値配列を復活の呪文に変換.
  * @param passwordNums 復活の呪文(数値配列)
- * @return 復活の呪文
+ * @returns 復活の呪文
  */
 export const toStringPassword = (passwordNums: number[]): string => {
   return passwordNums
     .filter((num) => 0 <= num && num < JUMON_ALPHABET.length)
-    .map((num) => JUMON_ALPHABET.charAt(num))
+    .map((num) => JUMON_ALPHABET[num])
     .join('');
 };
 
 /**
  * 復活の呪文を数値配列に変換.
  * @param password 復活の呪文
- * @return 数値配列
+ * @returns 数値配列
  */
 export const toNumberPassword = (password: string): number[] => {
   return password
@@ -468,7 +468,7 @@ export const toNumberPassword = (password: string): number[] => {
 /**
  * 呪文を正規化する.
  * @param password 復活の呪文
- * @return 正規化した復活の呪文
+ * @returns 正規化した復活の呪文
  */
 export const toNormalizePassword = (password: string): string => {
   return password
@@ -482,7 +482,7 @@ export const toNormalizePassword = (password: string): string => {
 /**
  * 呪文に使えない文字を返す
  * @param password 復活の呪文
- * @return 呪文に使えない文字
+ * @returns 呪文に使えない文字
  */
 export const invalidCharsInPassword = (password: string): string => {
   const invalidChars = password
@@ -495,7 +495,7 @@ export const invalidCharsInPassword = (password: string): string => {
 };
 
 /** CRC を計算する */
-const calcuteCrc = (bytes: number[]): number => {
+const calculateCrc = (bytes: number[]): number => {
   // 最初の１バイトを除いた分の CRC を計算する
   let crc = 0;
   for (let i = 1; i < CODE_LENGTH; i++) {
@@ -515,7 +515,7 @@ const calcuteCrc = (bytes: number[]): number => {
 /**
  * 復活の呪文作成.
  * @param info 復活の呪文の素
- * @return 復活の呪文
+ * @returns 復活の呪文
  */
 export const createPassword = (info: Dq1PasswordInfo): string => {
   const nameNums = toNumberName(info.name);
@@ -540,7 +540,7 @@ export const createPassword = (info: Dq1PasswordInfo): string => {
   ];
 
   // チェックコード(CRC)を計算する
-  const crc = calcuteCrc(bytes);
+  const crc = calculateCrc(bytes);
   bytes[0] = crc;
 
   // バイト単位データを、文字(6bit)単位に変換
@@ -568,7 +568,7 @@ export const createPassword = (info: Dq1PasswordInfo): string => {
  * DQ1 用復活の呪文を解析する
  *
  * @param password 復活の呪文
- * @return 解析結果
+ * @returns 解析結果
  */
 export const analyzePassword = (password: string): Dq1PasswordInfo | undefined => {
   const normalized = toNormalizePassword(password);
@@ -594,7 +594,7 @@ export const analyzePassword = (password: string): Dq1PasswordInfo | undefined =
   }
 
   // チェックコード(CRC)を計算する. 0 なら OK
-  const crc = calcuteCrc(bytes);
+  const crc = calculateCrc(bytes);
   bytes[0] ^= crc;
 
   const name = toStringName([(bytes[5] >> 2) & 0x3f, (bytes[13] >> 1) & 0x3f, bytes[2] & 0x3f, bytes[7] & 0x3f]);
@@ -642,15 +642,26 @@ export const analyzePassword = (password: string): Dq1PasswordInfo | undefined =
 
 /** 呪文が正しいかどうかをチェック */
 export const checkInfo = (info: Dq1PasswordInfo): boolean => {
-  if (info.checkCode !== 0 || info.key > 6 || info.herb > 6) {
+  if (info.checkCode !== 0) {
+    // チェックコードが不正
     return false;
   }
 
-  for (const item of info.items) {
-    if (INVALID_ITEM <= item) {
-      return false;
-    }
+  if (6 < info.key) {
+    // 魔法の鍵の数が多すぎる
+    return false;
   }
+
+  if (6 < info.herb) {
+    // 薬草の数が多すぎる
+    return false;
+  }
+
+  if (info.items.some((item) => Boolean(items[item].illegal))) {
+    // 不正なアイテムを持っている
+    return false;
+  }
+
   return true;
 };
 
@@ -658,7 +669,7 @@ export const checkInfo = (info: Dq1PasswordInfo): boolean => {
  * ハテナ付き呪文を元に、有効な呪文を作成する.
  *
  * @param password ハテナ付きパスワード
- * @return 有効なパスワードの配列
+ * @returns 有効なパスワードの配列
  */
 export const hatenaPassword = (password: string): Array<string> => {
   // ハテナを探す
@@ -670,11 +681,13 @@ export const hatenaPassword = (password: string): Array<string> => {
   } else {
     // ハテナがあった
     const passwords: Array<string> = [];
-    for (let i = 0; i < JUMON_ALPHABET.length; i++) {
+    for (const ch of JUMON_ALPHABET) {
       // 先頭のハテナに呪文に使える文字を仮定して、再帰呼び出しする
-      const newPassword = password.substring(0, position) + JUMON_ALPHABET.charAt(i) + password.substring(position + 1);
+      const firstHalf = password.substring(0, position);
+      const secondHalf = password.substring(position + 1);
+      const newPassword = `${firstHalf}${ch}${secondHalf}`;
       const resolved = hatenaPassword(newPassword);
-      Array.prototype.push.apply(passwords, resolved);
+      passwords.push(...resolved);
     }
     return passwords;
   }
@@ -683,7 +696,7 @@ export const hatenaPassword = (password: string): Array<string> => {
 /**
  * ハテナの数を数える.
  * @param password ハテナ付きパスワード（正規化済）
- * @return ハテナの数
+ * @returns ハテナの数
  */
 export const countHatena = (password: string): number => {
   return password.split('').filter((ch) => ch === '？').length;
@@ -693,22 +706,26 @@ export const countHatena = (password: string): number => {
  * パスワードを「５＋７＋５＋３」の形式で編集する.
  *
  * @param pswd パスワード(20文字)
- * @return 編集後パスワード
+ * @returns 編集後パスワード
  */
 export const editPassword = (pswd: string): string => {
-  return (
-    pswd.substring(0, 5) + '　' + pswd.substring(5, 12) + '　' + pswd.substring(12, 17) + '　' + pswd.substring(17, 20)
-  );
+  const part1 = pswd.substring(0, 5);
+  const part2 = pswd.substring(5, 12);
+  const part3 = pswd.substring(12, 17);
+  const part4 = pswd.substring(17, 20);
+  return `${part1}　${part2}　${part3}　${part4}`;
 };
 
 /**
  * パスワードを「５＋７」と「５＋３」の２行で編集する.
  *
  * @param pswd パスワード(20文字)
- * @return 編集後パスワード
+ * @returns 編集後パスワード
  */
 export const editPassword2 = (pswd: string): string => {
-  return (
-    pswd.substring(0, 5) + '　' + pswd.substring(5, 12) + '\n' + pswd.substring(12, 17) + '　' + pswd.substring(17, 20)
-  );
+  const part1 = pswd.substring(0, 5);
+  const part2 = pswd.substring(5, 12);
+  const part3 = pswd.substring(12, 17);
+  const part4 = pswd.substring(17, 20);
+  return `${part1}　${part2}\n${part3}　${part4}`;
 };

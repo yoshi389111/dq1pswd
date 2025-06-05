@@ -35,9 +35,9 @@ const Dq1Info: React.FC<Props> = (props) => {
       </div>
       <div className='frame'>
         <h2>そうび</h2>
-        <OutputLabel label='ぶき' value={dq1.wapons[info.wapon].name} />
+        <OutputLabel label='ぶき' value={dq1.weapons[info.wapon].name} />
         <OutputLabel label='よろい' value={dq1.armors[info.armor].name} />
-        <OutputLabel label='たて' value={dq1.shilds[info.shild].name} />
+        <OutputLabel label='たて' value={dq1.shields[info.shild].name} />
         <OutputLabel label='りゅうのうろこ' value={info.dragonScale ? '装備した' : '装備してない'} />
         <OutputLabel label='せんしのゆびわ' value={info.fighterRing ? '装備した' : '装備してない'} />
         <OutputLabel label='しのくびかざり' value={info.deadAmulet ? '装備した' : '装備してない'} />

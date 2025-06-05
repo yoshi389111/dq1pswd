@@ -217,9 +217,9 @@ const Dq1Edit: React.FC<Props> = (props) => {
       </div>
       <div className='frame'>
         <h2>そうび</h2>
-        <SelectItem label='ぶき' value={wapon} setValue={setWapon} items={dq1.wapons} />
+        <SelectItem label='ぶき' value={wapon} setValue={setWapon} items={dq1.weapons} />
         <SelectItem label='よろい' value={armor} setValue={setArmor} items={dq1.armors} />
-        <SelectItem label='たて' value={shild} setValue={setShild} items={dq1.shilds} />
+        <SelectItem label='たて' value={shild} setValue={setShild} items={dq1.shields} />
         <SelectItem label='りゅうのうろこ' value={scale} setValue={setScale} items={equipItems} />
         <SelectItem label='せんしのゆびわ' value={ring} setValue={setRing} items={equipItems} />
         <SelectItem label='しのくびかざり' value={amulet} setValue={setAmulet} items={equipItems} />
