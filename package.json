@@ -1,6 +1,6 @@
 {
   "name": "dq1pswd",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "private": true,
   "type": "module",
   "scripts": {
@@ -22,13 +22,16 @@
     "@types/react-dom": "^19.0.4",
     "@vitejs/plugin-react-swc": "^4.3.1",
     "eslint": "^10.8.0",
-    "eslint-plugin-react-hooks": "^5.1.0",
-    "eslint-plugin-react-refresh": "^0.4.19",
+    "eslint-plugin-react-hooks": "^7.1.0",
+    "eslint-plugin-react-refresh": "^0.5.0",
     "globals": "^15.15.0",
     "jsdom": "^26.0.0",
     "typescript": "~5.7.2",
     "typescript-eslint": "^8.65.0",
     "vite": "^8.0.16",
     "vitest": "^4.1.0"
+  },
+  "allowScripts": {
+    "@swc/core@1.15.41": true
   }
 }
