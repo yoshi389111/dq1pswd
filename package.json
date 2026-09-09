@@ -29,7 +29,7 @@
     "typescript": "~5.7.2",
     "typescript-eslint": "^8.65.0",
     "vite": "^8.0.16",
-    "vitest": "^4.1.0"
+    "vitest": "^4.1.11"
   },
   "allowScripts": {
     "@swc/core@1.15.41": true
